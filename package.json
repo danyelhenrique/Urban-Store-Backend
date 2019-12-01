@@ -2,9 +2,9 @@
   "name": "graph-ql-recepies",
   "version": "1.0.0",
   "description": "A starter for React-Apollo-GraphQL projects",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "server": "nodemon server.js",
+    "server": "nodemon src/server.js",
     "client": "cd client && npm start",
     "dev": "concurrently --names \"server,client\" \"npm run server --silent\" \"npm run client --silent\""
   },
@@ -23,5 +23,8 @@
     "graphql-tools": "^4.0.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
   }
 }
