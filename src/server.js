@@ -3,10 +3,9 @@ require('./config/mongoDb')
 
 const express = require('express')
 const { ApolloServer } = require('apollo-server-express');
-const Connects = require('./app/connects')
+const UserConnect = require('./app/connects/user')
+const ProductConnect = require('./app/connects/product')
 
-
-const User = require('./app/models/User')
 
 const typeDefs = require('./app/schemas')
 const resolvers = require('./app/resolvers')
@@ -16,8 +15,7 @@ const server = new ApolloServer({
     typeDefs, resolvers,
     context: async ({ req }) => {
         return {
-            models: { User },
-            helpers: { Connects }
+            helpers: { UserConnect, ProductConnect }
         }
     }
 });
