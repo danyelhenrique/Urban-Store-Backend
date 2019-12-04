@@ -11,7 +11,9 @@ const User = {
     },
 
     async index({ offset, limit }) {
+        console.log('users')
         const users = await UserModel.findAll({})
+        console.log(users)
         return users.map(user => {
             return user.dataValues
         })

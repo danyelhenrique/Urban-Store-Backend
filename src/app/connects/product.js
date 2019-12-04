@@ -24,12 +24,15 @@ const Product = {
     },
     async update({ id, ...data }) {
         const updateProduct = await ProductModel.findByPk(id)
+        const dataCheck = data.imageUrl ? { ...data, image_url: data.imageUrl } : { ...data }
 
-        const product = await updateProduct.update(data)
-        return product.dataValues
+        const product = await updateProduct.update(dataCheck)
+
+        
+        return { ...product.dataValues, imageUrl: product.dataValues.image_url }
     },
     async destroy({ id }) {
-        const destroyProduct= await ProductModel.findByPk(id)
+        const destroyProduct = await ProductModel.findByPk(id)
 
         const product = await destroyProduct.destroy()
         return !product.dataValues

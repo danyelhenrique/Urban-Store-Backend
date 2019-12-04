@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require('apollo-server-express');
+const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
     type Mutation {
@@ -9,6 +9,11 @@ const typeDefs = gql`
         storeProduct(name: String!, price: String!, imageUrl: String, description: String!): Product
         updateProduct(id: ID!, name: String, price: String, imageUrl: String, description: String): Product
         destroyProduct(id: ID!): Boolean
+
+
+         storePurchase(product_id: ID! user_id: ID!): Purchase
+         removePurchase(user_id: ID!, product_id: ID! ) : Boolean
+         destroyPurchase(user_id: ID! ) : Boolean
     }
 
 
@@ -18,21 +23,42 @@ const typeDefs = gql`
 
         indexProduct( offset: String, limit:String) :[Product]
         showProduct(id: ID!): Product
+
+        indexPurchase( offset: String, limit:String) :[User]
+        showPurchase(id: ID!): [All]
+    }
+
+    type All {
+        id: String
+
+        name: String
+
+        price: Float
+
+        imageUrl: String
+
+        description: String
+
+        users: [User]
+
+        products: [Product]
     }
 
 
     type User {
-        id: String!
+        id: ID
 
-        name: String!
+        name: String
 
-        password_hash: String!
+        password_hash: String
 
-        email: String!
+        email: String
 
         createdAt: String
 
         updatedAt: String
+
+        products: [Product]
 
     }
 
@@ -46,6 +72,14 @@ const typeDefs = gql`
         imageUrl: String!
 
         description: String!
+    }
+
+    type Purchase{
+        id: String !
+
+        user_id: String
+
+        product_id: String
     }
 
 `

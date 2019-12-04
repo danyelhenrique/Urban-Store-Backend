@@ -1,22 +1,34 @@
-'use strict';
 
-const DataTypes = require('sequelize')
-const sequelize = require('./index')
+// 'use strict';
+const { Model, DataTypes } = require('sequelize')
 
-const User = sequelize.define('users', {
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  password_hash: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+class User extends Model {
+  static init(sequelize) {
+    super.init({
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password_hash: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    }, {
+      sequelize
+    })
+  }
 
+  static associate(models) {
+    this.belongsToMany(models.Product, {
+      through: 'purchases',
+      as: 'products',
+      foreignKey: 'user_id'
+    })
+  }
+}
 
 module.exports = User
