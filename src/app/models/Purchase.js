@@ -2,7 +2,7 @@
 const { Model, DataTypes } = require('sequelize')
 
 class Purchase extends Model {
-    static init(sequelize) {
+    static init (sequelize) {
         super.init({
             // user_id: {
             //     type: DataTypes.INTEGER,
@@ -17,7 +17,7 @@ class Purchase extends Model {
         })
     }
 
-    static associate(models) {
+    static associate (models) {
         // this.belongsToMany(models.User, {
         //     through: 'purchases',
         //     // as: 'products',
@@ -30,6 +30,5 @@ class Purchase extends Model {
         // })
     }
 }
-
 
 module.exports = Purchase

@@ -9,7 +9,6 @@ const resolvers = {
         showUser: async (_, args, { helpers: { UserConnect } }) => {
             const user = await UserConnect.show(args)
             return { id, name, password_hash, email } = user
-
         },
         indexPurchase: async (_, args, { helpers: { PurchaseConnect } }) => {
             const pruchase = await PurchaseConnect.index(args)
@@ -20,7 +19,7 @@ const resolvers = {
         showPurchase: async (_, args, { helpers: { PurchaseConnect } }) => {
             const pruchase = await PurchaseConnect.show(args)
             return pruchase
-        },
+        }
     },
     Mutation: {
         storeUser: async (_, args, { helpers: { UserConnect } }) => {
@@ -55,7 +54,7 @@ const resolvers = {
             return product
         },
 
-        //Purchase
+        // Purchase
         storePurchase: async (_, args, { helpers: { PurchaseConnect } }) => {
             const purchase = await PurchaseConnect.store(args)
 
@@ -71,7 +70,7 @@ const resolvers = {
             const purchase = await PurchaseConnect.remove(args)
 
             return purchase
-        },
+        }
 
     }
 }

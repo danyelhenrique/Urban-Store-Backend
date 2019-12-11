@@ -1,4 +1,4 @@
-require('./dotenv');
+require('./dotenv')
 const mongoose = require('mongoose')
 
 const mongo = mongoose.connect(`

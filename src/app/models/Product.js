@@ -2,30 +2,30 @@
 const { Model, DataTypes } = require('sequelize')
 
 class Product extends Model {
-    static init(sequelize) {
+    static init (sequelize) {
         super.init({
             name: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: false
             },
             price: {
                 allowNull: false,
-                type: DataTypes.DECIMAL,
+                type: DataTypes.DECIMAL
             },
             image_url: {
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: false
             },
             description: {
                 type: DataTypes.STRING,
-                allowNull: false,
-            },
+                allowNull: false
+            }
         }, {
             sequelize
         })
     }
 
-    static associate(models) {
+    static associate (models) {
         this.belongsToMany(models.User, {
             through: 'purchases',
             as: 'users',
@@ -33,6 +33,5 @@ class Product extends Model {
         })
     }
 }
-
 
 module.exports = Product

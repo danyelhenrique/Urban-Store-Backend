@@ -2,11 +2,10 @@ const PurchaseModel = require('../models/Purchase')
 const User = require('../models/User')
 const Product = require('../models/Product')
 
-
 const Purchase = {
-    async store({ user_id, product_id }) {
+    async store ({ user_id, product_id }) {
         const [product] = await User.findOrCreate({
-            where: { id: user_id },
+            where: { id: user_id }
 
         })
 
@@ -15,18 +14,17 @@ const Purchase = {
         return prod
     },
 
-
-    async index({ offset, limit }) {
+    async index ({ offset, limit }) {
         const product = await User.findAll({
             required: false,
             include: [{
-                association: 'products',
+                association: 'products'
             }]
         })
 
         return product
     },
-    async show({ id }) {
+    async show ({ id }) {
         const products = await User.findByPk(id)
 
         const productJoin = await products.getProducts({
@@ -42,7 +40,7 @@ const Purchase = {
 
         return product
     },
-    async remove({ user_id, product_id }) {
+    async remove ({ user_id, product_id }) {
         // remove -> rows using  and user_id and prod_id
         const [destroyPurchase] = await User.findAll({
             required: false,
@@ -50,7 +48,7 @@ const Purchase = {
             attributes: ['name', 'id'],
             include: [{
                 association: 'products',
-                attributes: ['name', 'id'],
+                attributes: ['name', 'id']
             }]
         })
 
@@ -59,7 +57,7 @@ const Purchase = {
 
         return !product.dataValues
     },
-    async destroy({ user_id }) {
+    async destroy ({ user_id }) {
         // remove -> remove  all rows with user_id
         const [destroyPurchase] = await User.findAll({
             required: false,
@@ -67,7 +65,7 @@ const Purchase = {
             attributes: ['name', 'id'],
             include: [{
                 association: 'products',
-                attributes: ['name', 'id'],
+                attributes: ['name', 'id']
             }]
         })
 
@@ -76,6 +74,6 @@ const Purchase = {
 
         return !product.dataValues
     }
-};
+}
 
-module.exports = Purchase 
+module.exports = Purchase
