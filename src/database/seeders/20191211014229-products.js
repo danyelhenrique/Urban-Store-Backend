@@ -1,14 +1,13 @@
 'use strict'
 
+const data = require('../../../seedersFIles')
+
 module.exports = {
     up: (queryInterface, Sequelize) => {
-        return queryInterface.bulkInsert('products', [{
-            name: 'John Doe',
-            isBetaMember: false
-        }], {});
+        return queryInterface.bulkInsert('products', [data], {})
     },
 
     down: (queryInterface, Sequelize) => {
-        return queryInterface.bulkDelete('People', null, {});
+        return queryInterface.bulkDelete('products', null, {})
     }
 }
