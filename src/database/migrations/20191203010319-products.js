@@ -25,6 +25,10 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
+            data_brandName: {
+                type: Sequelize.TEXT,
+                allowNull: false
+            },
             data_ageGroup: {
                 type: Sequelize.TEXT,
                 allowNull: false
