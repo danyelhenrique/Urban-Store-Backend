@@ -2,6 +2,7 @@ module.exports = {
     data_price: 649,
     data_articleNumber: '132250315023 1368',
     data_productDisplayName: 'Palm Tree Girl"s Cr Blossom Drs Pink Dresses',
+    data_catalogAddDate: 1461658417,
     data_brandName: 'Palm Tree',
     data_ageGroup: 'Kids-Girls',
     data_gender: 'Women',
