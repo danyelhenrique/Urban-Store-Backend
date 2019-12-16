@@ -1,8 +1,8 @@
+'use strict'
 require('../config/dotenv')
 const User = require('../app/models/User')
 const Purchase = require('../app/models/Purchase')
 const Product = require('../app/models/Product')
-'use strict'
 
 const Sequelize = require('sequelize')
 const config = require('../config/database')

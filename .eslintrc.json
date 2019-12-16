@@ -4,7 +4,14 @@
         "node": true
     },
     "extends": [
-        "standard"
+        "standard",
+        "prettier",
+        "prettier/standard"
+    ],
+    "plugins": [
+        "standard",
+        "prettier",
+        "graphql"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -16,7 +23,7 @@
     },
     "rules": {
         "space-before-blocks": "off",
-        "indent": "off"
-        // "indent": ["error", "tab"]
+        "semi":["error", "never"],
+        "no-tabs":"off"
     }
 }

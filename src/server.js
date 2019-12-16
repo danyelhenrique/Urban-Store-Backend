@@ -5,21 +5,21 @@ require('./database')
 const express = require('express')
 const { resolve } = require('path')
 const { ApolloServer } = require('apollo-server-express')
-const UserConnect = require('./app/connects/user')
-const ProductConnect = require('./app/connects/product')
-const PurchaseConnect = require('./app/connects/purchase')
+// const UserConnect = require('./app/graph/connects/user')
+const ProductConnect = require('./app/graph/connects/product')
+// const PurchaseConnect = require('./app/graph/connects/purchase')
 
-const typeDefs = require('./app/schemas')
-const resolvers = require('./app/resolvers')
+const typeDefs = require('./app/graph/schemas')
+const resolvers = require('./app/graph/resolvers')
 
 const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context: async ({ req }) => {
-        return {
-            helpers: { UserConnect, ProductConnect, PurchaseConnect }
-        }
-    }
+	typeDefs,
+	resolvers,
+	context: async ({ req }) => {
+		return {
+			helpers: { ProductConnect }
+		}
+	}
 })
 
 const app = express()
@@ -35,9 +35,7 @@ const path = '/graphql'
 server.applyMiddleware({ app, path })
 
 app.get('/oi', (req, res) => {
-    res.sendfile(image + '/boy1.jpg')
+	res.sendfile(image + '/boy1.jpg')
 })
 
-app.listen({ port: PORT }, () =>
-    console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`)
-)
+app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`))

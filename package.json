@@ -24,6 +24,7 @@
     "graphql-tools": "^4.0.6",
     "graphql-type-json": "^0.3.1",
     "jsonwebtoken": "^8.5.1",
+    "merge-graphql-schemas": "^1.7.3",
     "mongoose": "^5.7.13",
     "pg": "^7.14.0",
     "pg-hstore": "^2.3.3",
@@ -33,7 +34,9 @@
   },
   "devDependencies": {
     "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-graphql": "^3.1.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-prettier": "^3.1.1",
@@ -41,6 +44,8 @@
     "eslint-plugin-standard": "^4.0.1",
     "nodemon": "^2.0.1",
     "prettier": "^1.19.1",
+    "prettier-eslint": "^9.0.1",
+    "prettier-standard": "^16.1.0",
     "sequelize-cli": "^5.5.1"
   }
 }
