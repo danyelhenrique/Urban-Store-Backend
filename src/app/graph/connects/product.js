@@ -1,35 +1,33 @@
 const ProductModel = require('../../models/Product')
 
-const Product = {
-	async store({ name, price, imageUrl, description }) {
-		const product = await ProductModel.create({
-			name,
-			price,
-			image_url: imageUrl,
-			description
-		})
-		return product.dataValues
-	},
-
+class Product {
 	async index({ offset, limit }) {
 		const products = await ProductModel.findAll({})
 		return products.map((product) => {
-			console.table(product)
 			return product.dataValues
 		})
-	},
+	}
+
 	async show({ id }) {
 		const product = await ProductModel.findByPk(id)
 		return product.dataValues
-	},
-	async update({ id, ...data }) {
+	}
+
+	async store({ input }) {
+		const product = await ProductModel.create({
+			input
+		})
+		return product.dataValues
+	}
+
+	async update({ id, input }) {
 		const updateProduct = await ProductModel.findByPk(id)
-		const dataCheck = data.imageUrl ? { ...data, image_url: data.imageUrl } : { ...data }
 
-		const product = await updateProduct.update(dataCheck)
+		const product = await updateProduct.update(input)
 
-		return { ...product.dataValues, imageUrl: product.dataValues.image_url }
-	},
+		return product
+	}
+
 	async destroy({ id }) {
 		const destroyProduct = await ProductModel.findByPk(id)
 
@@ -38,4 +36,4 @@ const Product = {
 	}
 }
 
-module.exports = Product
+module.exports = new Product()

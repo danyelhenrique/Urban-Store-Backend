@@ -2,7 +2,7 @@ module.exports = {
 	data_price: 650,
 	data_article_number: '132197135028 1303',
 	data_product_display_name: 'Palm Tree Girls Sp Jace Sko White Skirts',
-	data_add_date:418330925,
+	data_add_date: 418330925,
 	data_brand_name: 'Palm Tree',
 	data_age_group: 'Kids-Girls',
 	data_gender: 'Women',
@@ -73,4 +73,4 @@ module.exports = {
 	productDescriptors_description_descriptorType: 'description',
 	productDescriptors_description_value:
 		'Wash Care Machine Wash separately in cold water Use mild detergent Do not Bleach Avoid Soaking Remove promptly Line Dry inside out in shade Warm iron only Do Not Iron Directly on Print/embroidery'
-};
+}

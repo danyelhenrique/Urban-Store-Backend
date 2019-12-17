@@ -2,12 +2,10 @@ const { gql } = require('apollo-server-express')
 
 const typeInput = gql`
 	input ProductInput {
-		#
 		id: ID
 		data_price: Int
 		data_article_number: String
 		data_product_display_name: String
-		data_product_display_name: Int
 		data_brand_name: String
 		data_age_group: String
 		data_gender: String
@@ -50,6 +48,5 @@ const typeInput = gql`
 		productDescriptors_description_descriptorType: String
 		productDescriptors_description_value: String
 	}
-	#
 `
 module.exports = typeInput

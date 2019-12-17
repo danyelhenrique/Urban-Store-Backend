@@ -1,10 +1,9 @@
 const { gql } = require('apollo-server-express')
 
-const typeInput = require('./index')
-
 const typeQuery = gql`
 	extend type Query {
-		indexProduct(offset: String, limit: String): ${typeInput}
+		indexProduct(offset: String, limit: String): [Product]
+		showProduct(id: ID!): Product
 	}
 `
 module.exports = typeQuery
