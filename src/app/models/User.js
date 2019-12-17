@@ -1,4 +1,3 @@
-// 'use strict';
 const { Model, DataTypes } = require('sequelize')
 
 class User extends Model {
@@ -18,8 +17,7 @@ class User extends Model {
 					allowNull: false
 				},
 				password_hash: {
-					type: DataTypes.STRING,
-					allowNull: false
+					type: DataTypes.STRING
 				}
 			},
 			{
@@ -28,6 +26,9 @@ class User extends Model {
 				freezeTableName: true
 			}
 		)
+		User.addHook('beforeSave', (user, options) => {
+			user.password_hash = user.password
+		})
 	}
 
 	static associate(models) {
@@ -38,10 +39,5 @@ class User extends Model {
 		})
 	}
 }
-
-User.addHook('beforeSave', (user, options) => {
-	console.log(user)
-	console.log('options:', options)
-})
 
 module.exports = User

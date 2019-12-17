@@ -6,13 +6,13 @@ const typeDefs = gql`
 	type User {
 		name: String
 		email: String
-		password_hash: String
 	}
 
-	# extend type Query {
-	# 	indexUser(offset: String, limit: String): [User]
-	# 	showUser(id: ID!): User
-	# }
+	extend type Query {
+		indexUser(offset: String, limit: String): [User]
+		showUser(id: ID!): User
+	}
+
 	input UserInput {
 		name: String
 		email: String

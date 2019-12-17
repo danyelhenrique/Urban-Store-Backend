@@ -2,32 +2,33 @@ const UserModel = require('../../models/User')
 
 class User {
 	async index({ offset, limit }) {
-		const users = await UserModel.findAll()
-		return users.map((user) => {
-			return user.dataValues
+		const users = await UserModel.findAll({
+			attributes: [ 'id', 'name', 'email' ]
 		})
+		return users
 	}
 
 	async show({ id }) {
-		const user = await UserModel.findByPk(id)
-		return user.dataValues
+		const user = await UserModel.findByPk(id, {
+			attributes: [ 'id', 'name', 'email' ]
+		})
+		return user
 	}
 
-	async store({ name, email, password }) {
+	async store({ data: { name, email, password } }) {
 		const user = await UserModel.create({
 			name,
 			email,
-			password,
-			password_hash: password
+			password
 		})
-		return user.dataValues
+		return user
 	}
 
-	async update({ id, ...data }) {
+	async update({ id, input }) {
 		const updateUser = await UserModel.findByPk(id)
 
-		const user = await updateUser.update(data)
-		return user.dataValues
+		const user = await updateUser.update(input)
+		return user
 	}
 
 	async destroy({ id }) {
