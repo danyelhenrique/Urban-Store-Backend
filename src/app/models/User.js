@@ -13,6 +13,10 @@ class User extends Model {
 					type: DataTypes.STRING,
 					allowNull: false
 				},
+				password: {
+					type: DataTypes.VIRTUAL,
+					allowNull: false
+				},
 				password_hash: {
 					type: DataTypes.STRING,
 					allowNull: false
@@ -34,5 +38,10 @@ class User extends Model {
 		})
 	}
 }
+
+User.addHook('beforeSave', (user, options) => {
+	console.log(user)
+	console.log('options:', options)
+})
 
 module.exports = User

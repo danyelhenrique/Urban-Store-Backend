@@ -4,7 +4,7 @@ require('./database')
 
 const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
-// const UserConnect = require('./app/graph/connects/user')
+const UserConnect = require('./app/graph/connects/user')
 const ProductConnect = require('./app/graph/connects/product')
 // const PurchaseConnect = require('./app/graph/connects/purchase')
 
@@ -14,7 +14,7 @@ const server = new ApolloServer({
 	schema,
 	context: async ({ req }) => {
 		return {
-			helpers: { ProductConnect }
+			helpers: { ProductConnect, UserConnect }
 		}
 	}
 })
