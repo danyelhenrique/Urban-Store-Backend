@@ -1,32 +1,30 @@
-const PurchaseModel = require('../../models/Purchase')
-const User = require('../../models/User')
-const Product = require('../../models/Product')
-
-const Purchase = {
+/* eslint-disable camelcase */
+const User = require('../../models/User');
+class Purchase {
 	async store({ user_id, product_id }) {
 		const [ product ] = await User.findOrCreate({
-			where: { id: user_id }
-		})
+			where: { id: user_id },
+			attributes: [ 'id', 'name', 'email' ]
+		});
+		const [ purchases ] = await product.addProduct(product_id);
 
-		const prod = await product.addProduct(product_id)
-
-		return prod
-	},
+		const dataTransformation = { ...purchases.dataValues, user: { ...product.dataValues } };
+		return dataTransformation;
+	}
 
 	async index({ offset, limit }) {
-		const product = await User.findAll({
-			required: false,
-			include: [
-				{
-					association: 'products'
-				}
-			]
-		})
+		const a = await User.findAll({
+			include: [ { all: true, nested: true } ]
+		});
 
-		return product
-	},
+		console.log(a);
+
+		console.log('-------');
+		return a;
+	}
+
 	async show({ id }) {
-		const products = await User.findByPk(id)
+		const products = await User.findByPk(id);
 
 		const productJoin = await products.getProducts({
 			include: [
@@ -35,14 +33,11 @@ const Purchase = {
 					association: 'users'
 				}
 			]
-		})
-		const product = await productJoin.map((ele) => {
-			const imageUrl = ele.dataValues.image_url
-			return { ...ele.dataValues, imageUrl }
-		})
+		});
 
-		return product
-	},
+		return productJoin;
+	}
+
 	async remove({ user_id, product_id }) {
 		// remove -> rows using  and user_id and prod_id
 		const [ destroyPurchase ] = await User.findAll({
@@ -55,13 +50,14 @@ const Purchase = {
 					attributes: [ 'name', 'id' ]
 				}
 			]
-		})
+		});
 
 		// const product = await destroyPurchase.destroy()
-		const product = await destroyPurchase.removeProduct(product_id)
+		const product = await destroyPurchase.removeProduct(product_id);
 
-		return !product.dataValues
-	},
+		return !product.dataValues;
+	}
+
 	async destroy({ user_id }) {
 		// remove -> remove  all rows with user_id
 		const [ destroyPurchase ] = await User.findAll({
@@ -74,13 +70,13 @@ const Purchase = {
 					attributes: [ 'name', 'id' ]
 				}
 			]
-		})
+		});
 
-		const product = await destroyPurchase.destroy()
+		const product = await destroyPurchase.destroy();
 		// const product = await destroyPurchase.removeProduct(product_id)
 
-		return !product.dataValues
+		return !product.dataValues;
 	}
 }
 
-module.exports = Purchase
+module.exports = new Purchase();

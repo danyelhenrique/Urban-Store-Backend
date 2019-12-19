@@ -23,7 +23,7 @@
     },
     "rules": {
         "space-before-blocks": "off",
-        "semi":["error", "never"],
-        "no-tabs":"off"
+        "no-tabs": "off",
+        "semi": 0
     }
 }

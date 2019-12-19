@@ -1,6 +1,6 @@
 // 'use strict';
 // eslint-disable-next-line no-unused-vars
-const { Model, DataTypes } = require('sequelize')
+const { Model, DataTypes } = require('sequelize');
 
 class Purchase extends Model {
 	static init(sequelize) {
@@ -11,21 +11,21 @@ class Purchase extends Model {
 				tableName: 'purchases',
 				freezeTableName: true
 			}
-		)
+		);
 	}
 
 	static associate(models) {
 		this.belongsToMany(models.User, {
 			through: 'purchases',
-			// as: 'products',
+			as: 'users',
 			foreignKey: 'user_id'
-		})
+		});
 		this.belongsToMany(models.Product, {
 			through: 'purchases',
-			// as: 'products',
+			as: 'products',
 			foreignKey: 'product_id'
-		})
+		});
 	}
 }
 
-module.exports = Purchase
+module.exports = Purchase;

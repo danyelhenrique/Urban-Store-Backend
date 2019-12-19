@@ -1,11 +1,13 @@
-const { gql } = require('apollo-server-express')
+const { gql } = require('apollo-server-express');
 
 // const User =
 
 const typeDefs = gql`
 	type User {
+		id: ID
 		name: String
 		email: String
+		products: [Product]
 	}
 
 	extend type Query {
@@ -24,6 +26,6 @@ const typeDefs = gql`
 		destroyUser(id: ID!): Boolean
 		updateUser(id: ID!, input: UserInput): User
 	}
-`
+`;
 
-module.exports = typeDefs
+module.exports = typeDefs;
