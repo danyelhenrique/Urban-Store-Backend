@@ -9,7 +9,7 @@ const typeDefs = gql`
 	}
 
 	extend type Query {
-		indexPurchase(offset: String, limit: String): [User]
+		indexPurchase(offset: String, limit: String, data: ProductInput = ProductInput): [User]
 		#showPurchase(id: ID!): Purchase
 	}
 

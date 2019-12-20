@@ -1,5 +1,11 @@
 /* eslint-disable camelcase */
 const User = require('../../models/User');
+// eslint-disable-next-line no-unused-vars
+const Product = require('../../models/Product');
+// eslint-disable-next-line no-unused-vars
+const Purchases = require('../../models/Purchase');
+// eslint-disable-next-line no-unused-vars
+const sequelize = require('../../../database');
 class Purchase {
 	async store({ user_id, product_id }) {
 		const [ product ] = await User.findOrCreate({
@@ -12,14 +18,33 @@ class Purchase {
 		return dataTransformation;
 	}
 
-	async index({ offset, limit }) {
+	async index({ offset, limit, items }) {
+		// console.log(items);
+		const w = items.findIndex((ele) => ele.includes('qnt'));
+		items.splice(w);
+		const x = [
+			...items,
+			[ User.sequelize.fn('COUNT', User.sequelize.fn('DISTINCT', sequelize.col('User.id'))), 'qnt' ]
+		];
+
 		const a = await User.findAll({
-			include: [ { all: true, nested: true } ]
+			group: [
+				'User.id',
+				'products.id',
+				'products.purchases.created_at',
+				'products.purchases.updated_at',
+				'products.purchases.product_id',
+				'products.purchases.user_id'
+			],
+			include: [
+				{
+					all: true,
+					required: false,
+					attributes: x
+				}
+			]
 		});
-
-		console.log(a);
-
-		console.log('-------');
+		a.map((ele) => ele.dataValues.products.map((arr) => console.log(arr)));
 		return a;
 	}
 

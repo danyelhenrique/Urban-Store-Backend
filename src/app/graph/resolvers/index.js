@@ -1,3 +1,5 @@
+const { parseResolveInfo } = require('graphql-parse-resolve-info');
+
 const resolvers = {
 	Query: {
 		indexProduct(_, args, { helpers: { ProductConnect } }) {
@@ -16,7 +18,11 @@ const resolvers = {
 			const User = UserConnect.show(args);
 			return User;
 		},
-		indexPurchase(_, args, { helpers: { PurchaseConnect } }) {
+		indexPurchase(_, args, { helpers: { PurchaseConnect } }, info) {
+			const parsedResolveInfoFragment = parseResolveInfo(info);
+			const parseImtes = parsedResolveInfoFragment.fieldsByTypeName.User.products.fieldsByTypeName;
+			// const b =
+			args.items = Object.keys(parseImtes.Product);
 			const purchase = PurchaseConnect.index(args);
 			return purchase;
 		}

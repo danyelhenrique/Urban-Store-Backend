@@ -1,7 +1,8 @@
-const { gql } = require('apollo-server-express')
+const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 	type Product {
+		qnt: Integer
 		id: ID
 		data_price: String
 		data_article_number: String
@@ -49,6 +50,6 @@ const typeDefs = gql`
 		productDescriptors_description_descriptorType: String
 		productDescriptors_description_value: String #
 	}
-`
+`;
 
-module.exports = typeDefs
+module.exports = typeDefs;
