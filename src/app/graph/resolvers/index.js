@@ -76,6 +76,22 @@ const resolvers = {
 			const purchase = PurchaseConnect.store(args);
 
 			return purchase;
+		},
+		destroyPurchase(_, args, { helpers: { PurchaseConnect } }) {
+			const purchase = PurchaseConnect.destroy(args);
+
+			return purchase;
+		},
+		updatePurchase(_, args, { helpers: { PurchaseConnect } }, info) {
+			const parseInfo = parseResolveInfo(info);
+
+			const parseItems = parseInfo.fieldsByTypeName.User.products;
+			const finalPaser = parseItems.fieldsByTypeName.Product;
+			console.log(Object.keys(finalPaser));
+			args.items = Object.keys(finalPaser);
+			const purchase = PurchaseConnect.update(args);
+
+			return purchase;
 		}
 	}
 };

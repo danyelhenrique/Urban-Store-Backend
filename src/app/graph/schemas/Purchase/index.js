@@ -13,10 +13,17 @@ const typeDefs = gql`
 		showPurchase(id: ID!): Product
 	}
 
+	input updatePurchase {
+		userId: ID!
+		prodId: ID!
+		oldProdId: ID!
+		purchaseId: ID!
+	}
+
 	extend type Mutation {
 		storePurchase(user_id: ID!, product_id: ID!): Purchase
-		# destroyPurchase(id: ID!): Boolean
-		# updatePurchase(id: ID!, input: PurchaseInput): Purchase
+		destroyPurchase(userId: ID!): Boolean
+		updatePurchase(userId: ID!, prodId: ID!, oldProdId: ID!, purchaseId: ID!): User
 	}
 `;
 
