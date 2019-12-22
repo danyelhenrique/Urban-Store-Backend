@@ -9,8 +9,8 @@ const typeDefs = gql`
 	}
 
 	extend type Query {
-		indexPurchase(offset: String, limit: String, data: ProductInput = ProductInput): [User]
-		#showPurchase(id: ID!): Purchase
+		indexPurchase(offset: String, limit: String): [User]
+		showPurchase(id: ID!): Product
 	}
 
 	extend type Mutation {

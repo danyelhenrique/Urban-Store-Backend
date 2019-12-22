@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeInput = gql`
 	input ProductInput {
-		qnt: Integer
+		qnt: Int
 		id: ID
 		data_price: Int
 		data_article_number: String

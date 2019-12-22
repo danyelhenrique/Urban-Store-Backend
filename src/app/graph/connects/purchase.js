@@ -1,73 +1,61 @@
-/* eslint-disable camelcase */
 const User = require('../../models/User');
-// eslint-disable-next-line no-unused-vars
-const Product = require('../../models/Product');
-// eslint-disable-next-line no-unused-vars
-const Purchases = require('../../models/Purchase');
-// eslint-disable-next-line no-unused-vars
-const sequelize = require('../../../database');
+
+const IndexConnect = require('../../../utils/conects/indexConect');
+
 class Purchase {
-	async store({ user_id, product_id }) {
+	async store({ userId, productId }) {
 		const [ product ] = await User.findOrCreate({
-			where: { id: user_id },
+			where: { id: userId },
 			attributes: [ 'id', 'name', 'email' ]
 		});
-		const [ purchases ] = await product.addProduct(product_id);
+		const [ purchases ] = await product.addProduct(productId);
 
 		const dataTransformation = { ...purchases.dataValues, user: { ...product.dataValues } };
 		return dataTransformation;
 	}
 
 	async index({ offset, limit, items }) {
-		// console.log(items);
-		const w = items.findIndex((ele) => ele.includes('qnt'));
-		items.splice(w);
-		const x = [
-			...items,
-			[ User.sequelize.fn('COUNT', User.sequelize.fn('DISTINCT', sequelize.col('User.id'))), 'qnt' ]
-		];
+		const attributes = [ ...items ];
 
-		const a = await User.findAll({
-			group: [
-				'User.id',
-				'products.id',
-				'products.purchases.created_at',
-				'products.purchases.updated_at',
-				'products.purchases.product_id',
-				'products.purchases.user_id'
-			],
-			include: [
-				{
-					all: true,
-					required: false,
-					attributes: x
-				}
-			]
-		});
-		a.map((ele) => ele.dataValues.products.map((arr) => console.log(arr)));
-		return a;
+		const users = await User.findAll();
+		const IdQnt = users.map((user) => user.dataValues.id);
+
+		const data = { users, attributes, IdQnt };
+		const end = IndexConnect(data).formatPurchaseData();
+
+		return end;
 	}
 
-	async show({ id }) {
+	async show({ id, items }) {
+		const attributes = [ ...items ];
+
+		const clearInput = attributes.findIndex((prod) => prod.includes('user'));
+		attributes.splice(clearInput, 1);
+
 		const products = await User.findByPk(id);
 
-		const productJoin = await products.getProducts({
+		const [ productJoin ] = await products.getProducts({
 			include: [
 				{
 					required: false,
-					association: 'users'
+					all: true,
+					attributes: [ 'name', 'email', 'id' ]
 				}
-			]
+			],
+			attributes
 		});
+		const [ user ] = productJoin.users;
 
-		return productJoin;
+		const dataTransform = { ...productJoin.dataValues, user };
+
+		return dataTransform;
 	}
 
-	async remove({ user_id, product_id }) {
+	async remove({ userId, productId }) {
 		// remove -> rows using  and user_id and prod_id
 		const [ destroyPurchase ] = await User.findAll({
 			required: false,
-			where: { id: user_id },
+			where: { id: userId },
 			attributes: [ 'name', 'id' ],
 			include: [
 				{
@@ -78,16 +66,16 @@ class Purchase {
 		});
 
 		// const product = await destroyPurchase.destroy()
-		const product = await destroyPurchase.removeProduct(product_id);
+		const product = await destroyPurchase.removeProduct(productId);
 
 		return !product.dataValues;
 	}
 
-	async destroy({ user_id }) {
+	async destroy({ userId }) {
 		// remove -> remove  all rows with user_id
 		const [ destroyPurchase ] = await User.findAll({
 			required: false,
-			where: { id: user_id },
+			where: { id: userId },
 			attributes: [ 'name', 'id' ],
 			include: [
 				{

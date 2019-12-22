@@ -1,4 +1,5 @@
-const { parseResolveInfo } = require('graphql-parse-resolve-info');
+// eslint-disable-next-line no-unused-vars
+const { parseResolveInfo, simplifyParsedResolveInfoFragmentWithType } = require('graphql-parse-resolve-info');
 
 const resolvers = {
 	Query: {
@@ -19,11 +20,21 @@ const resolvers = {
 			return User;
 		},
 		indexPurchase(_, args, { helpers: { PurchaseConnect } }, info) {
-			const parsedResolveInfoFragment = parseResolveInfo(info);
-			const parseImtes = parsedResolveInfoFragment.fieldsByTypeName.User.products.fieldsByTypeName;
-			// const b =
-			args.items = Object.keys(parseImtes.Product);
+			const parseInfo = parseResolveInfo(info);
+			const parseItems = parseInfo.fieldsByTypeName.User;
+			const parsefildProd = parseItems.products.fieldsByTypeName.Product;
+			args.items = Object.keys(parsefildProd);
+
 			const purchase = PurchaseConnect.index(args);
+			return purchase;
+		},
+		showPurchase(_, args, { helpers: { PurchaseConnect } }, info) {
+			const parseInfo = parseResolveInfo(info);
+
+			const parseItems = parseInfo.fieldsByTypeName.Product;
+			args.items = Object.keys(parseItems);
+
+			const purchase = PurchaseConnect.show(args);
 			return purchase;
 		}
 	},

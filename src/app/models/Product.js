@@ -1,5 +1,5 @@
-'use strict'
-const { Model, DataTypes } = require('sequelize')
+'use strict';
+const { Model, DataTypes } = require('sequelize');
 
 class Product extends Model {
 	static init(sequelize) {
@@ -156,6 +156,10 @@ class Product extends Model {
 				},
 				productDescriptors_description_value: {
 					type: DataTypes.TEXT
+				},
+				qnt: {
+					type: DataTypes.VIRTUAL,
+					defaultValue: 0
 				}
 			},
 			{
@@ -163,7 +167,7 @@ class Product extends Model {
 				tableName: 'products',
 				freezeTableName: true
 			}
-		)
+		);
 	}
 
 	static associate(models) {
@@ -171,8 +175,8 @@ class Product extends Model {
 			through: 'purchases',
 			as: 'users',
 			foreignKey: 'product_id'
-		})
+		});
 	}
 }
 
-module.exports = Product
+module.exports = Product;
