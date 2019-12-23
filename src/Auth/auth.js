@@ -1,9 +1,10 @@
-const UserModel = require('../../models/User');
+const { AuthenticationError } = require('apollo-server-express');
+const UserModel = require('../Api/models/User');
 const jwt = require('jsonwebtoken');
 
 class Auth {
 	// login user
-	async store({ data: { name, email, password } }) {
+	async signIn({ data: { name, email, password } }) {
 		const user = await UserModel.findOne({
 			where: { email },
 			attributes: [ 'name', 'id' ]
@@ -22,11 +23,15 @@ class Auth {
 	}
 
 	// verify user
-	async show({ token }) {
+	async authenticate(token) {
+		if (!token) {
+			throw new AuthenticationError('erro token not provider');
+		}
 		// eslint-disable-next-line handle-callback-err
 		const user = jwt.verify(token, 'shhhhh', (err, decoded) => {
-			console.log(decoded.foo); // bar
-			if (err) return null;
+			if (err) {
+				throw new AuthenticationError('Invalid token');
+			}
 		});
 
 		return user;

@@ -1,24 +1,26 @@
-require('./config/dotenv');
-require('./config/mongoDb');
-require('./database');
+require('./Config/dotenv');
+require('./Config/mongoDb');
+require('./Database');
 
-const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const Auth = require('./app/graph/connects/auth');
-const UserConnect = require('./app/graph/connects/user');
-const ProductConnect = require('./app/graph/connects/product');
-const PurchaseConnect = require('./app/graph/connects/purchase');
+const express = require('express');
 
-const helpers = { UserConnect, ProductConnect, PurchaseConnect };
-helpers.auth = Auth.show;
+const UserController = require('./Api/controllers/user');
+const ProductController = require('./Api/controllers/product');
+const PurchaseController = require('./Api/controllers/purchase');
+// eslint-disable-next-line no-global-assign
 
-const schema = require('./app/graph/schemas');
+const helpers = { UserController, ProductController, PurchaseController };
+
+const schema = require('./Graphql');
 
 const server = new ApolloServer({
 	schema,
 	context: async ({ req }) => {
+		const token = req.headers.authentication;
 		return {
-			helpers
+			helpers,
+			token
 		};
 	}
 });

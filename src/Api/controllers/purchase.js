@@ -1,7 +1,7 @@
-const User = require('../../models/User');
+const User = require('../models/User');
 // eslint-disable-next-line no-unused-vars
 
-const IndexConnect = require('../../../utils/conects/indexConect');
+const IndexConnect = require('../../Utils/controllers/indexConect')
 
 class Purchase {
 	async index({ offset, limit, items }) {

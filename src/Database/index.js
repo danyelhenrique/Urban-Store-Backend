@@ -1,11 +1,11 @@
 'use strict';
-require('../config/dotenv');
-const User = require('../app/models/User');
-const Purchase = require('../app/models/Purchase');
-const Product = require('../app/models/Product');
+require('../Config/dotenv');
+const User = require('../Api/models/User');
+const Purchase = require('../Api/models/Purchase');
+const Product = require('../Api/models/Product');
 
 const Sequelize = require('sequelize');
-const config = require('../config/database');
+const config = require('../Config/database');
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 User.init(sequelize);

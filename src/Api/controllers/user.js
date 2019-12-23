@@ -1,4 +1,4 @@
-const UserModel = require('../../models/User');
+const UserModel = require('../models/User');
 
 class User {
 	async index({ offset, limit }) {
