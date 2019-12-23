@@ -55,7 +55,11 @@ const resolvers = {
 
 			return product;
 		},
+		loginUser(_, args, { helpers: { Auth } }) {
+			const user = Auth.store(args);
 
+			return user;
+		},
 		storeUser(_, args, { helpers: { UserConnect } }) {
 			const user = UserConnect.store(args);
 
