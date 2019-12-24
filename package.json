@@ -4,7 +4,8 @@
 	"description": "Api Graphql to store",
 	"main": "src/index.js",
 	"scripts": {
-		"server": "nodemon --exec babel-node src/index.js"
+		"server": "nodemon --exec babel-node src/index.js",
+		"start": "pm2 start --interpreter babel-node src/index.js"
 	},
 	"keywords": [],
 	"author": "",
@@ -25,6 +26,7 @@
 		"mongoose": "^5.7.13",
 		"pg": "^7.14.0",
 		"pg-hstore": "^2.3.3",
+		"pm2": "^4.2.1",
 		"require-all": "^3.0.0",
 		"sequelize": "^5.21.2"
 	},
