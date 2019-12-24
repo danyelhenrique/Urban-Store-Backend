@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from 'apollo-server-express'
 const typeDefs = gql`
 	type User {
 		id: ID
@@ -6,6 +6,6 @@ const typeDefs = gql`
 		email: String
 		products: [Product]
 	}
-`;
+`
 
-export default typeDefs;
+export default typeDefs

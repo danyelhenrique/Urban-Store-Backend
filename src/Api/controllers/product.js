@@ -1,39 +1,39 @@
-import ProductModel from '../models/Product';
+import ProductModel from '../models/Product'
 
 class Product {
 	async index({ offset, limit }) {
-		const products = await ProductModel.findAll({});
+		const products = await ProductModel.findAll({})
 		return products.map((product) => {
-			return product.dataValues;
-		});
+			return product.dataValues
+		})
 	}
 
 	async show({ id }) {
-		const product = await ProductModel.findByPk(id);
-		return product.dataValues;
+		const product = await ProductModel.findByPk(id)
+		return product.dataValues
 	}
 
 	async store({ input }) {
 		const product = await ProductModel.create({
 			input
-		});
-		return product.dataValues;
+		})
+		return product.dataValues
 	}
 
 	async update({ id, input }) {
-		const updateProduct = await ProductModel.findByPk(id);
+		const updateProduct = await ProductModel.findByPk(id)
 
-		const product = await updateProduct.update(input);
+		const product = await updateProduct.update(input)
 
-		return product;
+		return product
 	}
 
 	async destroy({ id }) {
-		const destroyProduct = await ProductModel.findByPk(id);
+		const destroyProduct = await ProductModel.findByPk(id)
 
-		const product = await destroyProduct.destroy();
-		return !product.dataValues;
+		const product = await destroyProduct.destroy()
+		return !product.dataValues
 	}
 }
 
-export default new Product();
+export default new Product()

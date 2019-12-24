@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from 'apollo-server-express'
 
 const typeRoot = gql`
 	type Query {
@@ -8,6 +8,6 @@ const typeRoot = gql`
 	type Mutation {
 		root: String!
 	}
-`;
+`
 
-export default typeRoot;
+export default typeRoot

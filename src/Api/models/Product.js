@@ -1,4 +1,4 @@
-import { Model, DataTypes } from 'sequelize';
+import { Model, DataTypes } from 'sequelize'
 
 class Product extends Model {
 	static init(sequelize) {
@@ -166,7 +166,7 @@ class Product extends Model {
 				tableName: 'products',
 				freezeTableName: true
 			}
-		);
+		)
 	}
 
 	static associate(models) {
@@ -174,8 +174,8 @@ class Product extends Model {
 			through: 'purchases',
 			as: 'users',
 			foreignKey: 'product_id'
-		});
+		})
 	}
 }
 
-export default Product;
+export default Product

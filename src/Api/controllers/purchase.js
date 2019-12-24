@@ -1,28 +1,28 @@
-import User from '../models/User';
+import User from '../models/User'
 // eslint-disable-next-line no-unused-vars
 
-import IndexConnect from '../../Utils/controllers/indexConect';
+import IndexConnect from '../../Utils/controllers/indexConect'
 
 class Purchase {
 	async index({ offset, limit, items }) {
-		const attributes = [ ...items ];
+		const attributes = [ ...items ]
 
-		const users = await User.findAll();
-		const IdQnt = users.map((user) => user.dataValues.id);
+		const users = await User.findAll()
+		const IdQnt = users.map((user) => user.dataValues.id)
 
-		const data = { users, attributes, IdQnt };
-		const end = IndexConnect(data).formatPurchaseData();
+		const data = { users, attributes, IdQnt }
+		const end = IndexConnect(data).formatPurchaseData()
 
-		return end;
+		return end
 	}
 
 	async show({ id, items }) {
-		const attributes = [ ...items ];
+		const attributes = [ ...items ]
 
-		const clearInput = attributes.findIndex((prod) => prod.includes('user'));
-		if (clearInput >= 0) attributes.splice(clearInput, 1);
+		const clearInput = attributes.findIndex((prod) => prod.includes('user'))
+		if (clearInput >= 0) attributes.splice(clearInput, 1)
 
-		const products = await User.findByPk(id);
+		const products = await User.findByPk(id)
 
 		const [ productJoin ] = await products.getProducts({
 			include: [
@@ -33,27 +33,27 @@ class Purchase {
 				}
 			],
 			attributes
-		});
-		const [ user ] = productJoin.users;
+		})
+		const [ user ] = productJoin.users
 
-		const dataTransform = { ...productJoin.dataValues, user };
+		const dataTransform = { ...productJoin.dataValues, user }
 
-		return dataTransform;
+		return dataTransform
 	}
 
 	async store({ userId, productId }) {
 		const [ product ] = await User.findOrCreate({
 			where: { id: userId },
 			attributes: [ 'id', 'name', 'email' ]
-		});
-		const [ purchases ] = await product.addProduct(productId);
+		})
+		const [ purchases ] = await product.addProduct(productId)
 
-		const dataTransformation = { ...purchases.dataValues, user: { ...product.dataValues } };
-		return dataTransformation;
+		const dataTransformation = { ...purchases.dataValues, user: { ...product.dataValues } }
+		return dataTransformation
 	}
 
 	async update({ userId, prodId, oldProdId, purchaseId, items }) {
-		const attributes = [ ...items ];
+		const attributes = [ ...items ]
 		// MODIFY TO USE TRANSECTION
 		const product = await User.findByPk(userId, {
 			required: false,
@@ -67,11 +67,11 @@ class Purchase {
 					}
 				}
 			]
-		});
-		await product.removeProduct(oldProdId);
-		await product.addProduct(prodId);
+		})
+		await product.removeProduct(oldProdId)
+		await product.addProduct(prodId)
 
-		return product;
+		return product
 	}
 
 	async destroy({ userId }) {
@@ -81,12 +81,12 @@ class Purchase {
 			where: { id: userId },
 			attributes: [ 'name', 'id' ],
 			include: [ { all: true } ]
-		});
+		})
 
-		const product = await destroyPurchase.destroy();
+		const product = await destroyPurchase.destroy()
 		// const product = await destroyPurchase.removeProduct(product_id)
 
-		return !product.dataValues;
+		return !product.dataValues
 	}
 
 	async remove({ userId, oldProdId }) {
@@ -101,13 +101,13 @@ class Purchase {
 					attributes: [ 'name', 'id' ]
 				}
 			]
-		});
+		})
 
 		// const product = await destroyPurchase.destroy()
-		const product = await destroyPurchase.removeProduct(oldProdId);
+		const product = await destroyPurchase.removeProduct(oldProdId)
 
-		return !product.dataValues;
+		return !product.dataValues
 	}
 }
 
-export default new Purchase();
+export default new Purchase()

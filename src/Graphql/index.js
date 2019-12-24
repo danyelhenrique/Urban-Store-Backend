@@ -1,12 +1,12 @@
-import Root from './root';
+import Root from './root'
 
-import { makeExecutableSchema } from 'apollo-server';
-import SessionDirective from './directives/session';
-import { sessionSchema, productSchema, purchaseSchema, userSchema } from './schemas';
-import { productQuery, purchaseQuery, userQuery } from './query';
-import { session, product, purchase, user } from './input';
-import { sessionMutation, productMutation, purchaseMutation, userMutation } from './mutation';
-import resolvers from './resolvers';
+import { makeExecutableSchema } from 'apollo-server'
+import SessionDirective from './directives/session'
+import { sessionSchema, productSchema, purchaseSchema, userSchema } from './schemas'
+import { productQuery, purchaseQuery, userQuery } from './query'
+import { session, product, purchase, user } from './input'
+import { sessionMutation, productMutation, purchaseMutation, userMutation } from './mutation'
+import resolvers from './resolvers'
 
 const typeDefs = [
 	Root,
@@ -26,7 +26,7 @@ const typeDefs = [
 	product,
 	purchase,
 	user
-];
+]
 
 const schema = makeExecutableSchema({
 	typeDefs,
@@ -34,5 +34,5 @@ const schema = makeExecutableSchema({
 	schemaDirectives: {
 		isAuthenticate: SessionDirective
 	}
-});
-export default schema;
+})
+export default schema

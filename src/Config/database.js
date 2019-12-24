@@ -1,4 +1,4 @@
-import './dotenv';
+import './dotenv'
 
 module.exports = {
 	username: process.env.DATABASE_USER_NAME,
@@ -11,4 +11,4 @@ module.exports = {
 		createdAt: 'created_at',
 		updatedAt: 'updated_at'
 	}
-};
+}

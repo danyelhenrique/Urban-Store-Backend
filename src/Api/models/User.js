@@ -1,6 +1,6 @@
-import { Model, DataTypes } from 'sequelize';
+import { Model, DataTypes } from 'sequelize'
 // eslint-disable-next-line no-unused-vars
-import { hashSync, compareSync } from 'bcrypt';
+import { hashSync, compareSync } from 'bcrypt'
 
 class User extends Model {
 	static init(sequelize) {
@@ -27,16 +27,16 @@ class User extends Model {
 				tableName: 'users',
 				freezeTableName: true
 			}
-		);
+		)
 		User.addHook('beforeSave', (user, options) => {
-			const password = hashSync(user.password, 8);
-			user.password_hash = password;
-		});
+			const password = hashSync(user.password, 8)
+			user.password_hash = password
+		})
 	}
 
 	comparePassword(password) {
-		const isValid = compareSync(password, this.password_hash);
-		return isValid;
+		const isValid = compareSync(password, this.password_hash)
+		return isValid
 	}
 
 	static associate(models) {
@@ -44,8 +44,8 @@ class User extends Model {
 			through: 'purchases',
 			as: 'products',
 			foreignKey: 'user_id'
-		});
+		})
 	}
 }
 
-export default User;
+export default User

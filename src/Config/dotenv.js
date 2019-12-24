@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'
 
-const config = dotenv.config();
+const config = dotenv.config()
 
-export default config;
+export default config

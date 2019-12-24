@@ -1,4 +1,4 @@
-import { Model } from 'sequelize';
+import { Model } from 'sequelize'
 
 class Purchase extends Model {
 	static init(sequelize) {
@@ -9,7 +9,7 @@ class Purchase extends Model {
 				tableName: 'purchases',
 				freezeTableName: true
 			}
-		);
+		)
 	}
 
 	static associate(models) {
@@ -17,13 +17,13 @@ class Purchase extends Model {
 			through: 'purchases',
 			as: 'users',
 			foreignKey: 'user_id'
-		});
+		})
 		this.belongsToMany(models.Product, {
 			through: 'purchases',
 			as: 'products',
 			foreignKey: 'product_id'
-		});
+		})
 	}
 }
 
-export default Purchase;
+export default Purchase

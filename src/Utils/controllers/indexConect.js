@@ -1,27 +1,27 @@
 class IndexConnect {
 	constructor({ users, attributes, IdQnt }) {
-		this.users = users;
-		this.attributes = attributes;
-		this.IdQnt = IdQnt;
+		this.users = users
+		this.attributes = attributes
+		this.IdQnt = IdQnt
 	}
 
 	async formatPurchaseData() {
-		const state = {};
-		state.usersData = await this.getAllproductsUser(this.users, this.attributes, this.IdQnt);
+		const state = {}
+		state.usersData = await this.getAllproductsUser(this.users, this.attributes, this.IdQnt)
 
 		state.usersData.map((item) => {
-			const prod = { ...item.dataValues };
+			const prod = { ...item.dataValues }
 			state.data = item.dataValues.users.map((user) => {
-				const users = user.dataValues;
-				return { ...users, products: [ prod ] };
-			});
-		});
+				const users = user.dataValues
+				return { ...users, products: [ prod ] }
+			})
+		})
 
-		return state.data;
+		return state.data
 	}
 
 	getAllproductsUser(users, attributes, IdQnt) {
-		let getProdcs;
+		let getProdcs
 		return new Promise((resolve, reject) => {
 			for (const index in IdQnt) {
 				getProdcs = users[index].getProducts({
@@ -33,11 +33,11 @@ class IndexConnect {
 						}
 					],
 					attributes
-				});
+				})
 			}
-			return resolve(getProdcs);
-		});
+			return resolve(getProdcs)
+		})
 	}
 }
 
-module.exports = (data) => new IndexConnect(data);
+module.exports = (data) => new IndexConnect(data)

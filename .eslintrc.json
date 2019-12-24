@@ -24,6 +24,6 @@
     "rules": {
         "space-before-blocks": "off",
         "no-tabs": "off",
-        "semi": 0
+        "semi":["error", "never"]
     }
 }

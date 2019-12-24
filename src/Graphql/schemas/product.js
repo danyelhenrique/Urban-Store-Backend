@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from 'apollo-server-express'
 const typeDefs = gql`
 	type Product {
 		user: User
@@ -49,6 +49,6 @@ const typeDefs = gql`
 		productDescriptors_description_descriptorType: String
 		productDescriptors_description_value: String #
 	}
-`;
+`
 
-export default typeDefs;
+export default typeDefs
