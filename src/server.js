@@ -1,35 +1,46 @@
-require('./Config/dotenv');
-require('./Config/mongoDb');
-require('./Database');
+import './Config/dotenv';
+import './Config/mongoDb';
+import './Database';
+import UserController from './Api/controllers/user';
+import ProductController from './Api/controllers/product';
+import PurchaseController from './Api/controllers/purchase';
 
-const { ApolloServer } = require('apollo-server-express');
-const express = require('express');
+import { ApolloServer } from 'apollo-server-express';
+import express from 'express';
 
-const UserController = require('./Api/controllers/user');
-const ProductController = require('./Api/controllers/product');
-const PurchaseController = require('./Api/controllers/purchase');
-// eslint-disable-next-line no-global-assign
+import schema from './Graphql';
 
 const helpers = { UserController, ProductController, PurchaseController };
 
-const schema = require('./Graphql');
-
-const server = new ApolloServer({
-	schema,
-	context: async ({ req }) => {
-		const token = req.headers.authentication;
-		return {
-			helpers,
-			token
-		};
+class Server {
+	constructor() {
+		// eslint-disable-next-line no-unused-vars
+		let apollo;
+		this.app = express();
+		this.server();
+		this.middlewares();
 	}
-});
 
-const app = express();
-const PORT = process.env.PORT || 3333;
+	server() {
+		this.apollo = new ApolloServer({
+			schema,
+			context: async ({ req }) => {
+				const token = req.headers.authentication;
+				return {
+					helpers,
+					token
+				};
+			}
+		});
 
-app.use(express.urlencoded({ extended: true }));
+		this.app.graphqlUrl = this.apollo.graphqlPath;
+	}
 
-server.applyMiddleware({ app });
+	middlewares() {
+		const app = this.app;
+		this.app.use(express.urlencoded({ extended: true }));
+		this.apollo.applyMiddleware({ app });
+	}
+}
 
-app.listen({ port: PORT }, () => console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`));
+export default new Server().app;

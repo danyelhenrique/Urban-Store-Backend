@@ -1,4 +1,4 @@
-const ProductModel = require('../models/Product');
+import ProductModel from '../models/Product';
 
 class Product {
 	async index({ offset, limit }) {
@@ -36,4 +36,4 @@ class Product {
 	}
 }
 
-module.exports = new Product();
+export default new Product();

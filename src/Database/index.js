@@ -1,11 +1,10 @@
-'use strict';
-require('../Config/dotenv');
-const User = require('../Api/models/User');
-const Purchase = require('../Api/models/Purchase');
-const Product = require('../Api/models/Product');
+import '../Config/dotenv';
+import User from '../Api/models/User';
+import Purchase from '../Api/models/Purchase';
+import Product from '../Api/models/Product';
 
-const Sequelize = require('sequelize');
-const config = require('../Config/database');
+import Sequelize from 'sequelize';
+import config from '../Config/database';
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 User.init(sequelize);
@@ -16,4 +15,4 @@ User.associate(sequelize.models);
 Purchase.associate(sequelize.models);
 Product.associate(sequelize.models);
 
-module.exports = sequelize;
+export default sequelize;

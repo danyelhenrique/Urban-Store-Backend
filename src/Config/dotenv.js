@@ -1,5 +1,5 @@
-const dotenv = require('dotenv')
+import dotenv from 'dotenv';
 
-const config = dotenv.config()
+const config = dotenv.config();
 
-module.exports = config
+export default config;

@@ -1,5 +1,4 @@
-'use strict';
-const { Model, DataTypes } = require('sequelize');
+import { Model, DataTypes } from 'sequelize';
 
 class Product extends Model {
 	static init(sequelize) {
@@ -179,4 +178,4 @@ class Product extends Model {
 	}
 }
 
-module.exports = Product;
+export default Product;

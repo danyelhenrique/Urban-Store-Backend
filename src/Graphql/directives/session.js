@@ -1,14 +1,13 @@
-const { SchemaDirectiveVisitor } = require('apollo-server-express');
+import { SchemaDirectiveVisitor } from 'apollo-server-express';
 
-const { defaultFieldResolver } = require('graphql');
-const auth = require('../../Auth/auth');
+import { defaultFieldResolver } from 'graphql';
+import auth from '../../Auth/auth';
 
 class AuthDirective extends SchemaDirectiveVisitor {
 	visitFieldDefinition(field) {
 		const { resolve = defaultFieldResolver } = field;
 		field.resolve = async function(...args) {
 			const [ , , tokenIndex ] = args;
-			console.log(tokenIndex);
 			await auth.authenticate(tokenIndex.token);
 
 			const result = await resolve.apply(this, args);
@@ -18,4 +17,4 @@ class AuthDirective extends SchemaDirectiveVisitor {
 	}
 }
 
-module.exports = AuthDirective;
+export default AuthDirective;

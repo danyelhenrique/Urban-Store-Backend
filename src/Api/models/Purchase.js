@@ -1,6 +1,4 @@
-// 'use strict';
-// eslint-disable-next-line no-unused-vars
-const { Model, DataTypes } = require('sequelize');
+import { Model } from 'sequelize';
 
 class Purchase extends Model {
 	static init(sequelize) {
@@ -28,4 +26,4 @@ class Purchase extends Model {
 	}
 }
 
-module.exports = Purchase;
+export default Purchase;

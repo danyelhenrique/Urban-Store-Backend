@@ -1,7 +1,7 @@
-const User = require('../models/User');
+import User from '../models/User';
 // eslint-disable-next-line no-unused-vars
 
-const IndexConnect = require('../../Utils/controllers/indexConect')
+import IndexConnect from '../../Utils/controllers/indexConect';
 
 class Purchase {
 	async index({ offset, limit, items }) {
@@ -72,8 +72,7 @@ class Purchase {
 		await product.addProduct(prodId);
 
 		return product;
-    }
-    
+	}
 
 	async destroy({ userId }) {
 		// remove -> remove  all rows with user_id
@@ -109,7 +108,6 @@ class Purchase {
 
 		return !product.dataValues;
 	}
-
 }
 
-module.exports = new Purchase();
+export default new Purchase();

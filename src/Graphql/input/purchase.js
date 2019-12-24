@@ -1,5 +1,4 @@
-const { gql } = require('apollo-server-express');
-
+import { gql } from 'apollo-server-express';
 const typeDefs = gql`
 	input updatePurchase {
 		userId: ID!
@@ -9,4 +8,4 @@ const typeDefs = gql`
 	}
 `;
 
-module.exports = typeDefs;
+export default typeDefs;

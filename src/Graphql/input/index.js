@@ -1,11 +1,6 @@
-const auth = require('./auth');
-const product = require('./product');
-const purchase = require('./purchase');
-const user = require('./user');
+import product from './product';
+import purchase from './purchase';
+import session from './session';
+import user from './user';
 
-module.exports = {
-	auth,
-	product,
-	purchase,
-	user
-};
+export { session, product, purchase, user };

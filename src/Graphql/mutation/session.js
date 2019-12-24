@@ -1,9 +1,8 @@
-const { gql } = require('apollo-server-express');
-
+import { gql } from 'apollo-server-express';
 const typeDefs = gql`
 	extend type Mutation {
 		loginUser(data: AuthInput!): Auth
 	}
 `;
 
-module.exports = typeDefs;
+export default typeDefs;

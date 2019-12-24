@@ -1,5 +1,4 @@
-const { gql } = require('apollo-server-express');
-
+import { gql } from 'apollo-server-express';
 const typeQuery = gql`
 	extend type Mutation {
 		storeProduct(input: ProductInput!): Product
@@ -7,4 +6,4 @@ const typeQuery = gql`
 		updateProduct(id: ID!, input: ProductInput): Product
 	}
 `;
-module.exports = typeQuery;
+export default typeQuery;

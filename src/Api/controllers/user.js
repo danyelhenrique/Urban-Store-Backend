@@ -1,4 +1,4 @@
-const UserModel = require('../models/User');
+import UserModel from '../models/User';
 
 class User {
 	async index({ offset, limit }) {
@@ -39,4 +39,4 @@ class User {
 	}
 }
 
-module.exports = new User();
+export default new User();

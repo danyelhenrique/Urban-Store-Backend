@@ -1,11 +1,6 @@
-const authMutation = require('./auth');
-const productMutation = require('./product');
-const purchaseMutation = require('./purchase');
-const userMutation = require('./user');
+import productMutation from './product';
+import purchaseMutation from './purchase';
+import sessionMutation from './session';
+import userMutation from './user';
 
-module.exports = {
-	authMutation,
-	productMutation,
-	purchaseMutation,
-	userMutation
-};
+export { sessionMutation, productMutation, purchaseMutation, userMutation };

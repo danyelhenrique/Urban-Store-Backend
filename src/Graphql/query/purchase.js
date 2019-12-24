@@ -1,5 +1,4 @@
-const { gql } = require('apollo-server-express');
-
+import { gql } from 'apollo-server-express';
 const typeDefs = gql`
 	extend type Query {
 		indexPurchase(offset: String, limit: String): [User]
@@ -7,4 +6,4 @@ const typeDefs = gql`
 	}
 `;
 
-module.exports = typeDefs;
+export default typeDefs;

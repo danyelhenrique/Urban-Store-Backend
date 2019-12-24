@@ -1,11 +1,10 @@
-const { gql } = require('apollo-server-express');
-
+import { gql } from 'apollo-server-express';
 const typeQuery = gql`
-	directive @autenticar on FIELD_DEFINITION
+	directive @isAuthenticate on FIELD_DEFINITION
 
 	extend type Query {
 		indexProduct(offset: String, limit: String): [Product]
-		showProduct(id: ID!): Product @autenticar
+		showProduct(id: ID!): Product @isAuthenticate
 	}
 `;
-module.exports = typeQuery;
+export default typeQuery;

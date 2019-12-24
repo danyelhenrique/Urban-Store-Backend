@@ -1,5 +1,4 @@
-const { gql } = require('apollo-server-express');
-
+import { gql } from 'apollo-server-express';
 const typeDefs = gql`
 	extend type Mutation {
 		storeUser(data: UserInput!): User
@@ -8,4 +7,4 @@ const typeDefs = gql`
 	}
 `;
 
-module.exports = typeDefs;
+export default typeDefs;

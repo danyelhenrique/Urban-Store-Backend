@@ -1,9 +1,5 @@
-const productQuery = require('./product');
-const purchaseQuery = require('./purchase');
-const userQuery = require('./user');
+import productQuery from './product';
+import purchaseQuery from './purchase';
+import userQuery from './user';
 
-module.exports = {
-	productQuery,
-	purchaseQuery,
-	userQuery
-};
+export { productQuery, purchaseQuery, userQuery };

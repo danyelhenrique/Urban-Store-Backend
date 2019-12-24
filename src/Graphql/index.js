@@ -1,34 +1,28 @@
-const { makeExecutableSchema } = require('apollo-server');
-const AuthDirective = require('./directives/auth');
+import Root from './root';
 
-// const Auth = require('./auth');
-// const Product = require('./product');
-// const Purchase = require('./purchase');
-// const User = require('./user');
-// const ProductQuery = require('./product/query');
-// const ProductMutation = require('./Product/mutation');
-// const ProductInput = require('./Product/input');
-const Root = require('./root');
-const { authSchema, productSchema, purchaseSchema, userSchema } = require('./schemas');
-const { productQuery, purchaseQuery, userQuery } = require('./query');
-const { auth, product, purchase, user } = require('./input');
-const { authMutation, productMutation, purchaseMutation, userMutation } = require('./mutation');
-const resolvers = require('./resolvers');
-// const typeDefs = [ Root, Product, ProductQuery, ProductMutation, ProductInput, User, Purchase, Auth ];
+import { makeExecutableSchema } from 'apollo-server';
+import SessionDirective from './directives/session';
+import { sessionSchema, productSchema, purchaseSchema, userSchema } from './schemas';
+import { productQuery, purchaseQuery, userQuery } from './query';
+import { session, product, purchase, user } from './input';
+import { sessionMutation, productMutation, purchaseMutation, userMutation } from './mutation';
+import resolvers from './resolvers';
+
 const typeDefs = [
 	Root,
-	authSchema,
+	sessionSchema,
 	productSchema,
 	purchaseSchema,
+	userSchema,
 	userSchema,
 	productQuery,
 	purchaseQuery,
 	userQuery,
-	authMutation,
+	sessionMutation,
 	productMutation,
 	purchaseMutation,
 	userMutation,
-	auth,
+	session,
 	product,
 	purchase,
 	user
@@ -38,7 +32,7 @@ const schema = makeExecutableSchema({
 	typeDefs,
 	resolvers,
 	schemaDirectives: {
-		autenticar: AuthDirective
+		isAuthenticate: SessionDirective
 	}
 });
-module.exports = schema;
+export default schema;

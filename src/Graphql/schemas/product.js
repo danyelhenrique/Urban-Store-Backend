@@ -1,5 +1,4 @@
-const { gql } = require('apollo-server-express');
-
+import { gql } from 'apollo-server-express';
 const typeDefs = gql`
 	type Product {
 		user: User
@@ -52,4 +51,4 @@ const typeDefs = gql`
 	}
 `;
 
-module.exports = typeDefs;
+export default typeDefs;

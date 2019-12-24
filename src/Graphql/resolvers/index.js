@@ -1,5 +1,5 @@
-const { parseResolveInfo } = require('graphql-parse-resolve-info');
-const Auth = require('../../Auth/auth');
+import { parseResolveInfo } from 'graphql-parse-resolve-info';
+import Auth from '../../Auth/auth';
 
 const resolvers = {
 	Query: {
@@ -101,4 +101,4 @@ const resolvers = {
 	}
 };
 
-module.exports = resolvers;
+export default resolvers;

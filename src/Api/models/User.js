@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require('sequelize')
+import { Model, DataTypes } from 'sequelize';
 
 class User extends Model {
 	static init(sequelize) {
@@ -25,10 +25,10 @@ class User extends Model {
 				tableName: 'users',
 				freezeTableName: true
 			}
-		)
+		);
 		User.addHook('beforeSave', (user, options) => {
-			user.password_hash = user.password
-		})
+			user.password_hash = user.password;
+		});
 	}
 
 	static associate(models) {
@@ -36,8 +36,8 @@ class User extends Model {
 			through: 'purchases',
 			as: 'products',
 			foreignKey: 'user_id'
-		})
+		});
 	}
 }
 
-module.exports = User
+export default User;

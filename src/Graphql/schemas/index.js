@@ -1,11 +1,6 @@
-const authSchema = require('./auth');
-const productSchema = require('./product');
-const purchaseSchema = require('./purchase');
-const userSchema = require('./user');
+import sessionSchema from './session';
+import productSchema from './product';
+import purchaseSchema from './purchase';
+import userSchema from './user';
 
-module.exports = {
-	authSchema,
-	productSchema,
-	purchaseSchema,
-	userSchema
-};
+export { sessionSchema, productSchema, purchaseSchema, userSchema };

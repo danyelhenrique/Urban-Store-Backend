@@ -1,6 +1,6 @@
-const { AuthenticationError } = require('apollo-server-express');
-const UserModel = require('../Api/models/User');
-const jwt = require('jsonwebtoken');
+import { AuthenticationError } from 'apollo-server-express';
+import UserModel from '../Api/models/User';
+import jwt from 'jsonwebtoken';
 
 class Auth {
 	// login user
@@ -38,4 +38,4 @@ class Auth {
 	}
 }
 
-module.exports = new Auth();
+export default new Auth();
