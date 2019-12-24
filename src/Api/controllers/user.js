@@ -16,7 +16,6 @@ class User {
 	}
 
 	async store({ data: { name, email, password } }) {
-		console.log('oi');
 		const user = await UserModel.create({
 			name,
 			email,

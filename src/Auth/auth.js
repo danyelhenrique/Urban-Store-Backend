@@ -1,38 +1,40 @@
 import { AuthenticationError } from 'apollo-server-express';
+import { promisify } from 'util';
+
 import UserModel from '../Api/models/User';
 import jwt from 'jsonwebtoken';
 
 class Auth {
-	// login user
 	async signIn({ data: { name, email, password } }) {
 		const user = await UserModel.findOne({
 			where: { email },
-			attributes: [ 'name', 'id' ]
+			attributes: [ 'name', 'id', 'password_hash' ]
 		});
-		// compare password with bcrypt later
+		const validPassword = user.comparePassword(password);
+
+		if (!validPassword) {
+			throw new AuthenticationError('Fail to authenticate user');
+		}
 
 		const payload = {
 			user: user.id,
-			name: user.name,
-			exp: Math.floor(Date.now() / 1000) + 60 * 60 // 1HR
+			name: user.name
 		};
 
-		const token = jwt.sign(payload, 'shhhhh');
+		const token = jwt.sign(payload, process.env.JWT_ENCRYPT, { expiresIn: '3d' });
 
 		return { token };
 	}
 
-	// verify user
 	async authenticate(token) {
 		if (!token) {
 			throw new AuthenticationError('erro token not provider');
 		}
-		// eslint-disable-next-line handle-callback-err
-		const user = jwt.verify(token, 'shhhhh', (err, decoded) => {
-			if (err) {
-				throw new AuthenticationError('Invalid token');
-			}
-		});
+		const user = await promisify(jwt.verify)(token, process.env.JWT_ENCRYPT);
+
+		if (!user) {
+			throw new AuthenticationError('erro token not provider');
+		}
 
 		return user;
 	}
