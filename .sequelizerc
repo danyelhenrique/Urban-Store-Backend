@@ -1,3 +1,6 @@
+require("@babel/register");
+require("@babel/preset-env");
+
 const path = require('path');
 
 module.exports = {
