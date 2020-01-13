@@ -3,12 +3,21 @@ import Auth from '../../Auth/auth'
 
 const resolvers = {
 	Query: {
-		indexProduct(_, args, { helpers: { ProductController } }) {
+		indexProduct(_, args, { helpers: { ProductController } }, info) {
+            const parseInfo = parseResolveInfo(info)
+            const parseItems = parseInfo.fieldsByTypeName.Product
+			args.filds = Object.keys(parseItems)
+
 			const product = ProductController.index(args)
 			return product
-		},
-		showProduct(_, args, { helpers: { ProductController } }) {
-			const product = ProductController.show(args)
+        },
+		showProduct(_, args, { helpers: { ProductController } }, info) {
+            const parseInfo = parseResolveInfo(info)
+            const parseItems = parseInfo.fieldsByTypeName.Product
+            args.filds = Object.keys(parseItems)
+
+            const product = ProductController.show(args)
+
 			return product
 		},
 		indexUser(_, args, { helpers: { UserController } }) {
@@ -91,7 +100,6 @@ const resolvers = {
 
 			const parseItems = parseInfo.fieldsByTypeName.User.products
 			const finalPaser = parseItems.fieldsByTypeName.Product
-			console.log(Object.keys(finalPaser))
 			args.items = Object.keys(finalPaser)
 			const purchase = PurchaseController.update(args)
 

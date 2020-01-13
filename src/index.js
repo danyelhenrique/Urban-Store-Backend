@@ -4,7 +4,7 @@ import "./Database"
 
 import app from "./server"
 
-const PORT = process.env.PORT || 3333
+const PORT = process.env.PORT || 4594
 
 app.listen({ port: PORT }, () =>
     console.log(`🚀 Server ready at http://localhost:${PORT}${app.graphqlUrl}`)
