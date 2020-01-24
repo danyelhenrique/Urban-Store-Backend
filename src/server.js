@@ -15,20 +15,21 @@ const helpers = { UserController, ProductController, PurchaseController }
 class Server {
 	constructor() {
 		// eslint-disable-next-line no-unused-vars
-		let apollo
-		this.app = express()
-		this.server()
-		this.middlewares()
+        let apollo
+        this.app = express()
+        this.server()
+        this.middlewares()
+
 	}
 
 	server() {
 		this.apollo = new ApolloServer({
-			schema,
+            schema,
 			context: async ({ req }) => {
-				const token = req.headers.authentication
+                const token = req.headers.authentication
 				return {
 					helpers,
-					token
+                    token,
 				}
 			}
 		})
@@ -37,8 +38,10 @@ class Server {
 	}
 
 	middlewares() {
-		const app = this.app
-		this.app.use(express.urlencoded({ extended: true }))
+        const app = this.app
+		this.app.use(express.json())
+        this.app.use(express.urlencoded({ extended: true }))
+
 		this.apollo.applyMiddleware({ app })
 	}
 }

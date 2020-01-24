@@ -5,39 +5,46 @@ import UserModel from '../Api/models/User'
 import jwt from 'jsonwebtoken'
 
 class Auth {
-	async signIn({ data: { name, email, password } }) {
-		const user = await UserModel.findOne({
-			where: { email },
-			attributes: [ 'name', 'id', 'password_hash' ]
-		})
-		const validPassword = user.comparePassword(password)
+    async signIn({ data: { name, email, password } }) {
+        const user = await UserModel.findOne({
+            where: { email },
+            attributes: ['name', 'id', 'password_hash']
+        })
+        const validPassword = user.comparePassword(password)
 
-		if (!validPassword) {
-			throw new AuthenticationError('Fail to authenticate user')
-		}
+        if (!validPassword) {
+            throw new AuthenticationError('Fail to authenticate user')
+        }
 
-		const payload = {
-			user: user.id,
-			name: user.name
-		}
+        const payload = {
+            user: user.id,
+            name: user.name
+        }
 
-		const token = jwt.sign(payload, process.env.JWT_ENCRYPT, { expiresIn: '3d' })
+        const token = jwt.sign(payload, process.env.JWT_ENCRYPT, {
+            expiresIn: '3d'
+        })
 
-		return { token }
-	}
+        return { token }
+    }
 
-	async authenticate(token) {
-		if (!token) {
-			throw new AuthenticationError('erro token not provider')
-		}
-		const user = await promisify(jwt.verify)(token, process.env.JWT_ENCRYPT)
+    async authenticate(token) {
+        let user
+        if (!token) {
+            return { user, token, isValid: false }
+        }
+        try {
+            user = await promisify(jwt.verify)(token, process.env.JWT_ENCRYPT)
+        } catch (err) {
+            return { user, isValid: false }
+        }
 
-		if (!user) {
-			throw new AuthenticationError('erro token not provider')
-		}
+        if (!user) {
+            return { user, isValid: false }
+        }
 
-		return user
-	}
+        return { user, token, isValid: true }
+    }
 }
 
 export default new Auth()

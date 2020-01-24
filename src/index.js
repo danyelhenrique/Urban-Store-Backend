@@ -1,5 +1,5 @@
 import "./Config/dotenv"
-import "./Config/mongoDb"
+// import "./Config/mongoDb"
 import "./Database"
 
 import app from "./server"

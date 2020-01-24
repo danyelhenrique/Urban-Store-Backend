@@ -5,7 +5,8 @@
     "main": "src/index.js",
     "scripts": {
         "server": "cross-env NODE_ENV=development nodemon --exec babel-node src/index.js",
-        "sequelize": "cross-env NODE_ENV=development sequelize",
+        "sequelize": "sequelize",
+        "lint": "eslint --fix .",
         "start": "pm2 start --interpreter babel-node src/index.js"
     },
     "keywords": [],
