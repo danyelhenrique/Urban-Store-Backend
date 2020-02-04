@@ -4,6 +4,7 @@ const typeDefs = gql`
 		id: ID
 		name: String
 		email: String
+		avatar_url: String
 		products: [Product]
 	}
 `

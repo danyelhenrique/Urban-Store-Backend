@@ -3,49 +3,54 @@ import { Model, DataTypes } from 'sequelize'
 import { hashSync, compareSync } from 'bcrypt'
 
 class User extends Model {
-	static init(sequelize) {
-		super.init(
-			{
-				name: {
-					type: DataTypes.STRING,
-					allowNull: false
-				},
-				email: {
-					type: DataTypes.STRING,
-					allowNull: false
-				},
-				password: {
-					type: DataTypes.VIRTUAL,
-					allowNull: false
-				},
-				password_hash: {
-					type: DataTypes.STRING
-				}
-			},
-			{
-				sequelize,
-				tableName: 'users',
-				freezeTableName: true
-			}
-		)
-		User.addHook('beforeSave', (user, options) => {
-			const password = hashSync(user.password, 8)
-			user.password_hash = password
-		})
-	}
+    static init(sequelize) {
+        super.init(
+            {
+                name: {
+                    type: DataTypes.STRING,
+                    allowNull: false
+                },
+                email: {
+                    type: DataTypes.STRING,
+                    allowNull: false
+                },
+                password: {
+                    type: DataTypes.VIRTUAL,
+                    allowNull: false
+                },
+                password_hash: {
+                    type: DataTypes.STRING
+                },
+                avatar_url: {
+                    type: DataTypes.STRING,
+                    defaultValue:
+                        'https://cdn1.iconfinder.com/data/icons/instagram-ui-colored/48/JD-17-512.png'
+                }
+            },
+            {
+                sequelize,
+                tableName: 'users',
+                freezeTableName: true
+            }
+        )
+        User.addHook('beforeSave', (user, options) => {
+            const password = hashSync(user.password, 8)
+            user.password_hash = password
+        })
+    }
 
-	comparePassword(password) {
-		const isValid = compareSync(password, this.password_hash)
-		return isValid
-	}
+    comparePassword(password) {
+        const isValid = compareSync(password, this.password_hash)
+        return isValid
+    }
 
-	static associate(models) {
-		this.belongsToMany(models.Product, {
-			through: 'purchases',
-			as: 'products',
-			foreignKey: 'user_id'
-		})
-	}
+    static associate(models) {
+        this.belongsToMany(models.Product, {
+            through: 'purchases',
+            as: 'products',
+            foreignKey: 'user_id'
+        })
+    }
 }
 
 export default User

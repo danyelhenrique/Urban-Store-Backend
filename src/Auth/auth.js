@@ -8,7 +8,7 @@ class Auth {
     async signIn({ data: { name, email, password } }) {
         const user = await UserModel.findOne({
             where: { email },
-            attributes: ['name', 'id', 'password_hash', 'email']
+            attributes: ['name', 'id', 'password_hash', 'email', 'avatar_url']
         })
         const validPassword = user.comparePassword(password)
 
@@ -19,14 +19,15 @@ class Auth {
         const payload = {
             user: user.id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            avatar_url: user.avatar_url
         }
 
         const token = jwt.sign(payload, process.env.JWT_ENCRYPT, {
             expiresIn: '3d'
         })
 
-        return { token, ...payload }
+        return { token, ...payload, isValid: true }
     }
 
     async authenticate(token) {
