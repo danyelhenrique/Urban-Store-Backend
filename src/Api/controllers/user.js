@@ -1,4 +1,5 @@
 import UserModel from '../models/User'
+import jwt from 'jsonwebtoken'
 
 class User {
     async index({ offset, limit }) {
@@ -25,10 +26,30 @@ class User {
     }
 
     async update({ id, input }) {
-        const updateUser = await UserModel.findByPk(id)
+        const updateUser = await UserModel.findByPk(id, {
+            attributes: ['name', 'id', 'password_hash', 'email', 'avatar_url']
+        })
 
-        const user = await updateUser.update(input)
-        return user
+        const { password_hash: password, ...userData } = updateUser.dataValues
+
+        const user = await updateUser.update({
+            password,
+            ...userData,
+            ...input
+        })
+
+        const payload = {
+            user: user.id,
+            name: user.name,
+            email: user.email,
+            avatar_url: user.avatar_url
+        }
+
+        const token = jwt.sign(payload, process.env.JWT_ENCRYPT, {
+            expiresIn: '3d'
+        })
+
+        return { token, ...payload, isValid: true }
     }
 
     async destroy({ id }) {

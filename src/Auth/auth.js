@@ -22,7 +22,7 @@ class Auth {
             email: user.email,
             avatar_url: user.avatar_url
         }
-
+    console.log(user)
         const token = jwt.sign(payload, process.env.JWT_ENCRYPT, {
             expiresIn: '3d'
         })
@@ -45,7 +45,7 @@ class Auth {
             return { user, isValid: false }
         }
 
-        return { user, token, isValid: true }
+        return { ...user, token, isValid: true }
     }
 }
 
