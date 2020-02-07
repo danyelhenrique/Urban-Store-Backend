@@ -27,16 +27,10 @@ class User {
 
     async update({ id, input }) {
         const updateUser = await UserModel.findByPk(id, {
-            attributes: ['name', 'id', 'password_hash', 'email', 'avatar_url']
+            attributes: ['name', 'id', 'email', 'avatar_url']
         })
 
-        const { password_hash: password, ...userData } = updateUser.dataValues
-
-        const user = await updateUser.update({
-            password,
-            ...userData,
-            ...input
-        })
+        const user = await updateUser.update({ ...input })
 
         const payload = {
             user: user.id,

@@ -25,6 +25,10 @@ class User extends Model {
                     type: DataTypes.STRING,
                     defaultValue:
                         'https://cdn1.iconfinder.com/data/icons/instagram-ui-colored/48/JD-17-512.png'
+                },
+                token: {
+                    type: DataTypes.TEXT,
+                    allowNull: true
                 }
             },
             {
@@ -33,7 +37,7 @@ class User extends Model {
                 freezeTableName: true
             }
         )
-        User.addHook('beforeSave', (user, options) => {
+        User.addHook('beforeCreate', (user, options) => {
             const password = hashSync(user.password, 8)
             user.password_hash = password
         })

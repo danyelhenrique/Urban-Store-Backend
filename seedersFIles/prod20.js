@@ -1,8 +1,8 @@
 module.exports = {
-    data_price: 1395,
+    data_price: 139.5,
     data_article_number: '406026-012',
     data_product_display_name: 'Nike Men Black & White Reversible Shorts',
-    data_add_date:461658417,
+    data_add_date: 461658417,
     data_brand_name: 'Nike',
     data_age_group: 'Adults-Men',
     data_gender: 'Men',
@@ -16,34 +16,58 @@ module.exports = {
     data_year: '2012',
     data_usage: 'Sports',
     data_display_categories: 'Sports Wear',
-    data_landing_page_url: 'Shorts Nike Nike-Men-Black--White-Reversible-Shorts 10020 buy',
+    data_landing_page_url:
+        'Shorts Nike Nike-Men-Black--White-Reversible-Shorts 10020 buy',
     data_article_attributes_pattern: 'Solid',
-    data_article_attributes_body_or_garment_size: 'To-Fit Denotes Body Measurements in',
+    data_article_attributes_body_or_garment_size:
+        'To-Fit Denotes Body Measurements in',
 
-    data_size_representation: 'http://assets.myntassets.com/assets/images/sizechart/2016/12/12/11481538623678-Shorts_Adults-Men.png',
-    data_back_image_url: 'http://assets.myntassets.com/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images.jpg',
-    data_back_resolutions1080_x1440_xmini: 'http://assets.myntassets.com/h_1440,q_95,w_1080/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images_mini.jpg',
-    data_back_resolutions_150X200: 'http://assets.myntassets.com/h_200,q_95,w_150/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images.jpg',
-    data_back_resolutions_360X480: 'http://assets.myntassets.com/h_480,q_95,w_360/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images.jpg',
-    data_back_resolutions_180X240: 'http://assets.myntassets.com/h_240,q_95,w_180/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images.jpg',
-    data_back_resolutions_360X480_xmini: 'http://assets.myntassets.com/h_480,q_95,w_360/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images_mini.jpg',
-    data_back_resolutions_180X240_xmini: 'http://assets.myntassets.com/h_240,q_95,w_180/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images_mini.jpg',
-    data_back_resolutions_150X200_xmini: 'http://assets.myntassets.com/h_200,q_95,w_150/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images_mini.jpg',
-    data_back_resolutions_48X64_xmini: 'http://assets.myntassets.com/h_64,q_95,w_48/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images_mini.jpg',
-    data_back_resolutions_125X161: 'http://assets.myntassets.com/h_161,q_95,w_125/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images.jpg',
+    data_size_representation:
+        'http://assets.myntassets.com/assets/images/sizechart/2016/12/12/11481538623678-Shorts_Adults-Men.png',
+    data_back_image_url:
+        'http://assets.myntassets.com/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images.jpg',
+    data_back_resolutions1080_x1440_xmini:
+        'http://assets.myntassets.com/h_1440,q_95,w_1080/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images_mini.jpg',
+    data_back_resolutions_150X200:
+        'http://assets.myntassets.com/h_200,q_95,w_150/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images.jpg',
+    data_back_resolutions_360X480:
+        'http://assets.myntassets.com/h_480,q_95,w_360/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images.jpg',
+    data_back_resolutions_180X240:
+        'http://assets.myntassets.com/h_240,q_95,w_180/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images.jpg',
+    data_back_resolutions_360X480_xmini:
+        'http://assets.myntassets.com/h_480,q_95,w_360/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images_mini.jpg',
+    data_back_resolutions_180X240_xmini:
+        'http://assets.myntassets.com/h_240,q_95,w_180/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images_mini.jpg',
+    data_back_resolutions_150X200_xmini:
+        'http://assets.myntassets.com/h_200,q_95,w_150/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images_mini.jpg',
+    data_back_resolutions_48X64_xmini:
+        'http://assets.myntassets.com/h_64,q_95,w_48/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images_mini.jpg',
+    data_back_resolutions_125X161:
+        'http://assets.myntassets.com/h_161,q_95,w_125/v1/images/style/properties/0b55d801d06f27cbe3cbdfe94ffe9f24_images.jpg',
 
-    data_front_imageURL: 'http://assets.myntassets.com/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
-    data_front_resolutions1080_x1440_xmini: 'http://assets.myntassets.com/h_1440,q_95,w_1080/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images_mini.jpg',
+    data_front_imageURL:
+        'http://assets.myntassets.com/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
+    data_front_resolutions1080_x1440_xmini:
+        'http://assets.myntassets.com/h_1440,q_95,w_1080/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images_mini.jpg',
 
-    data_front_resolutions1080X1440: 'http://assets.myntassets.com/h_1440,q_95,w_1080/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
-    data_front_resolutions_150X200: 'http://assets.myntassets.com/h_200,q_95,w_150/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
-    data_front_resolutions_360X480: 'http://assets.myntassets.com/h_480,q_95,w_360/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
-    data_front_resolutions_180X240: 'http://assets.myntassets.com/h_240,q_95,w_180/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
-    data_front_resolutions_360X480_xmini: 'http://assets.myntassets.com/h_480,q_95,w_360/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images_mini.jpg',
-    data_front_resolutions_180X240_xmini: 'http://assets.myntassets.com/h_240,q_95,w_180/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images_mini.jpg',
-    data_front_resolutions_150X200_xmini: 'http://assets.myntassets.com/h_200,q_95,w_150/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images_mini.jpg',
-    data_front_resolutions_48X64_xmini: 'http://assets.myntassets.com/h_64,q_95,w_48/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images_mini.jpg',
-    data_front_resolutions_125X161: 'http://assets.myntassets.com/h_161,q_95,w_125/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
+    data_front_resolutions1080X1440:
+        'http://assets.myntassets.com/h_1440,q_95,w_1080/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
+    data_front_resolutions_150X200:
+        'http://assets.myntassets.com/h_200,q_95,w_150/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
+    data_front_resolutions_360X480:
+        'http://assets.myntassets.com/h_480,q_95,w_360/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
+    data_front_resolutions_180X240:
+        'http://assets.myntassets.com/h_240,q_95,w_180/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
+    data_front_resolutions_360X480_xmini:
+        'http://assets.myntassets.com/h_480,q_95,w_360/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images_mini.jpg',
+    data_front_resolutions_180X240_xmini:
+        'http://assets.myntassets.com/h_240,q_95,w_180/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images_mini.jpg',
+    data_front_resolutions_150X200_xmini:
+        'http://assets.myntassets.com/h_200,q_95,w_150/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images_mini.jpg',
+    data_front_resolutions_48X64_xmini:
+        'http://assets.myntassets.com/h_64,q_95,w_48/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images_mini.jpg',
+    data_front_resolutions_125X161:
+        'http://assets.myntassets.com/h_161,q_95,w_125/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg',
 
     productDescriptors_description_descriptorType: 'description',
     productDescriptors_description_value: `

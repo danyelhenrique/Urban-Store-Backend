@@ -5,7 +5,7 @@ class Product extends Model {
 		super.init(
 			{
 				data_price: {
-					type: DataTypes.INTEGER,
+					type: DataTypes.FLOAT,
 					allowNull: false
 				},
 				data_article_number: {

@@ -1,6 +1,6 @@
 const Product = `
     id: ID
-    data_price: Int
+    data_price: Float
     data_article_number: String
     data_product_display_name: String
     data_brand_name: String

@@ -5,7 +5,7 @@ import UserModel from '../Api/models/User'
 import jwt from 'jsonwebtoken'
 
 class Auth {
-    async signIn({ data: { name, email, password } }) {
+    async signIn({ data: { email, password } }) {
         const user = await UserModel.findOne({
             where: { email },
             attributes: ['name', 'id', 'password_hash', 'email', 'avatar_url']
@@ -22,30 +22,46 @@ class Auth {
             email: user.email,
             avatar_url: user.avatar_url
         }
-    console.log(user)
         const token = jwt.sign(payload, process.env.JWT_ENCRYPT, {
             expiresIn: '3d'
         })
+
+        await user.update({ token })
 
         return { token, ...payload, isValid: true }
     }
 
     async authenticate(token) {
-        let user
         if (!token) {
-            return { user, token, isValid: false }
+            return { isValid: false }
         }
+
+        let userDecript
+
+        const user = await UserModel.findOne({
+            where: { token: `${token}` },
+            attributes: ['name', 'id', 'email', 'avatar_url']
+        }).catch(console.error)
+
         try {
-            user = await promisify(jwt.verify)(token, process.env.JWT_ENCRYPT)
+            userDecript = await promisify(jwt.verify)(
+                token,
+                process.env.JWT_ENCRYPT
+            )
         } catch (err) {
-            return { user, isValid: false }
+            return { isValid: false }
         }
 
         if (!user) {
-            return { user, isValid: false }
+            const findUser = await UserModel.findOne({
+                where: { id: userDecript.user }
+            })
+            await findUser.update({ token: null })
+
+            return { isValid: false }
         }
 
-        return { ...user, token, isValid: true }
+        return { ...userDecript, token, isValid: true }
     }
 }
 
