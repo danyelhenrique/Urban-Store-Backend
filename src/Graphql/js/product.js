@@ -1,5 +1,7 @@
 const Product = `
     id: ID
+    total:Float
+    qnt: Int
     data_price: Float
     data_article_number: String
     data_product_display_name: String

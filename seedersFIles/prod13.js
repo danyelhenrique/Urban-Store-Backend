@@ -1,5 +1,10 @@
+const qnt = Math.floor(Math.random() * 10) + 1
+const dataPrice = 109.9
+const total = dataPrice
 module.exports = {
-    data_price: 109.5,
+    data_price: dataPrice,
+    total,
+    qnt,
     data_article_number: '445179-700',
     data_product_display_name: 'Nike Men As Ss Cruiser Yellow T-Shirts',
     data_add_date: 461658417,

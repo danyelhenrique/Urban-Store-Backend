@@ -1,5 +1,10 @@
+const qnt = Math.floor(Math.random() * 10) + 1
+const dataPrice = 129.5
+const total = dataPrice
 module.exports = {
-    data_price: 129.5,
+    data_price: dataPrice,
+    total,
+    qnt,
     data_article_number: '405405-102',
     data_product_display_name: 'Nike Women As Miler Ss White T-Shirts',
     data_add_date: 461658417,

@@ -9,6 +9,14 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER
             },
+            total: {
+                type: Sequelize.FLOAT,
+                allowNull: false
+            },
+            qnt: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
             data_price: {
                 type: Sequelize.FLOAT,
                 allowNull: false

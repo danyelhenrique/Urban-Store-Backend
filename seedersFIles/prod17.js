@@ -1,5 +1,10 @@
+const qnt = Math.floor(Math.random() * 10) + 1
+const dataPrice = 64.9
+const total = dataPrice
 module.exports = {
-    data_price: 39.95,
+    data_price: dataPrice,
+    total,
+    qnt,
     data_article_number: '343497-425',
     data_product_display_name: 'Nike Women As The Windru Blue Jackets',
     data_add_date: 461658417,

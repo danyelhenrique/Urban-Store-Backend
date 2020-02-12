@@ -1,5 +1,10 @@
+const qnt = Math.floor(Math.random() * 10) + 1
+const dataPrice = 104.5
+const total = dataPrice
 module.exports = {
-    data_price: 104.5,
+    data_price: dataPrice,
+    total,
+    qnt,
     data_article_number: '424560-611',
     data_product_display_name: 'Nike Men Town Round Red Neck T-Shirts',
     data_add_date: 461658417,

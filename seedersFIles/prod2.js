@@ -1,5 +1,10 @@
+const qnt = Math.floor(Math.random() * 10) + 1
+const dataPrice = 65.9
+const total = dataPrice
 module.exports = {
-    data_price: 65.0,
+    data_price: dataPrice,
+    total,
+    qnt,
     data_article_number: '132197135028 1303',
     data_product_display_name: 'Palm Tree Girls Sp Jace Sko White Skirts',
     data_add_date: 418330925,

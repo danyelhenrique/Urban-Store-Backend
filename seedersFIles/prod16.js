@@ -1,5 +1,10 @@
+const qnt = Math.floor(Math.random() * 10) + 1
+const dataPrice = 64.9
+const total = dataPrice
 module.exports = {
-    data_price: 64.9,
+    data_price: dataPrice,
+    total,
+    qnt,
     data_article_number: '132250315023 1368',
     data_product_display_name: 'Palm Tree Girl"s Cr Blossom Drs Pink Dresses',
     data_add_date: 461658417,

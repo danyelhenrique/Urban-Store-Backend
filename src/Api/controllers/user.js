@@ -30,7 +30,7 @@ class User {
             attributes: ['name', 'id', 'email', 'avatar_url']
         })
 
-        const user = await updateUser.update({ ...input })
+        const user = await updateUser.update(input)
 
         const payload = {
             user: user.id,
@@ -39,11 +39,7 @@ class User {
             avatar_url: user.avatar_url
         }
 
-        const token = jwt.sign(payload, process.env.JWT_ENCRYPT, {
-            expiresIn: '3d'
-        })
-
-        return { token, ...payload, isValid: true }
+        return payload
     }
 
     async destroy({ id }) {

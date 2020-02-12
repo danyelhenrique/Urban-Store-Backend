@@ -1,5 +1,10 @@
+const qnt = Math.floor(Math.random() * 10) + 1
+const dataPrice = 199.5
+const total = dataPrice
 module.exports = {
-    data_price: 199.5,
+    data_price: dataPrice,
+    total,
+    qnt,
     data_article_number: '393799-064',
     data_product_display_name: 'Nike Men As 7 Sw Temp Grey Shorts',
     data_add_date: 461658417,

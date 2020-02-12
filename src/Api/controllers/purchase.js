@@ -4,110 +4,112 @@ import User from '../models/User'
 import IndexConnect from '../../Utils/controllers/indexConect'
 
 class Purchase {
-	async index({ offset, limit, items }) {
-		const attributes = [ ...items ]
+    async index({ offset, limit, items }) {
+        const attributes = [...items]
 
-		const users = await User.findAll()
-		const IdQnt = users.map((user) => user.dataValues.id)
+        const users = await User.findAll()
+        const IdQnt = users.map(user => user.dataValues.id)
 
-		const data = { users, attributes, IdQnt }
-		const end = IndexConnect(data).formatPurchaseData()
+        const data = { users, attributes, IdQnt }
+        const end = IndexConnect(data).formatPurchaseData()
 
-		return end
-	}
+        return end
+    }
 
-	async show({ id, items }) {
-		const attributes = [ ...items ]
+    async show({ id, items }) {
+        const attributes = [...items]
 
-		const clearInput = attributes.findIndex((prod) => prod.includes('user'))
-		if (clearInput >= 0) attributes.splice(clearInput, 1)
+        const clearInput = attributes.findIndex(prod => prod.includes('user'))
+        if (clearInput >= 0) attributes.splice(clearInput, 1)
 
-		const products = await User.findByPk(id)
+        const products = await User.findByPk(id)
 
-		const [ productJoin ] = await products.getProducts({
-			include: [
-				{
-					required: false,
-					all: true,
-					attributes: [ 'name', 'email', 'id' ]
-				}
-			],
-			attributes
-		})
-		const [ user ] = productJoin.users
+        const [productJoin] = await products.getProducts({
+            include: [
+                {
+                    required: false,
+                    all: true,
+                    attributes: ['name', 'email', 'id']
+                }
+            ],
+            attributes
+        })
+        const [user] = productJoin.users
 
-		const dataTransform = { ...productJoin.dataValues, user }
+        const dataTransform = { ...productJoin.dataValues, user }
 
-		return dataTransform
-	}
+        return dataTransform
+    }
 
-	async store({ userId, productId }) {
-		const [ product ] = await User.findOrCreate({
-			where: { id: userId },
-			attributes: [ 'id', 'name', 'email' ]
-		})
-		const [ purchases ] = await product.addProduct(productId)
+    async store({ userId, productIds }) {
+        const user = await User.findOrCreate({
+            where: { id: userId },
+            attributes: ['id', 'name', 'email']
+        }).then(userArray => {
+            const user = userArray[0]
+            productIds.map(prodId => user.addProduct(prodId))
+            return user
+        })
 
-		const dataTransformation = { ...purchases.dataValues, user: { ...product.dataValues } }
-		return dataTransformation
-	}
+        return user
+    }
 
-	async update({ userId, prodId, oldProdId, purchaseId, items }) {
-		const attributes = [ ...items ]
-		// MODIFY TO USE TRANSECTION
-		const product = await User.findByPk(userId, {
-			required: false,
-			include: [
-				{
-					association: 'products',
-					attributes,
-					where: { id: prodId },
-					through: {
-						where: { id: purchaseId }
-					}
-				}
-			]
-		})
-		await product.removeProduct(oldProdId)
-		await product.addProduct(prodId)
+    async update({ userId, prodId, oldProdId, purchaseId, items }) {
+        const attributes = [...items]
+        // MODIFY TO USE TRANSECTION
+        const product = await User.findByPk(userId, {
+            required: false,
+            include: [
+                {
+                    association: 'products',
+                    attributes,
+                    where: { id: prodId },
+                    through: {
+                        where: { id: purchaseId }
+                    }
+                }
+            ]
+        })
+        await product.removeProduct(oldProdId)
+        await product.addProduct(prodId)
 
-		return product
-	}
+        return product
+    }
 
-	async destroy({ userId }) {
-		// remove -> remove  all rows with user_id
-		const [ destroyPurchase ] = await User.findAll({
-			required: false,
-			where: { id: userId },
-			attributes: [ 'name', 'id' ],
-			include: [ { all: true } ]
-		})
+    async destroy({ userId }) {
+        // remove -> remove  all rows with user_id
+        const [destroyPurchase] = await User.findAll({
+            required: false,
+            where: { id: userId },
+            attributes: ['name', 'id'],
+            include: [{ all: true }]
+        })
 
-		const product = await destroyPurchase.destroy()
-		// const product = await destroyPurchase.removeProduct(product_id)
+        const product = await destroyPurchase.destroy()
+        // const product = await destroyPurchase.removeProduct(product_id)
 
-		return !product.dataValues
-	}
+        return !product.dataValues
+    }
 
-	async remove({ userId, oldProdId }) {
-		// remove -> rows using  and user_id and prod_id
-		const [ destroyPurchase ] = await User.findAll({
-			required: false,
-			where: { id: userId },
-			attributes: [ 'name', 'id' ],
-			include: [
-				{
-					association: 'products',
-					attributes: [ 'name', 'id' ]
-				}
-			]
-		})
+    async remove({ userId, oldProdId }) {
+        // remove -> rows using  and user_id and prod_id
+        const [destroyPurchase] = await User.findAll({
+            required: false,
+            where: { id: userId },
+            attributes: ['name', 'id'],
+            include: [
+                {
+                    association: 'products',
+                    attributes: ['name', 'id']
+                }
+            ]
+        })
 
-		// const product = await destroyPurchase.destroy()
-		const product = await destroyPurchase.removeProduct(oldProdId)
+        // const product = await destroyPurchase.destroy()
+        const product = await destroyPurchase.removeProduct(oldProdId)
 
-		return !product.dataValues
-	}
+        return !product.dataValues
+    }
 }
 
 export default new Purchase()

@@ -1,5 +1,10 @@
+const qnt = Math.floor(Math.random() * 10) + 1
+const dataPrice = 109.6
+const total = dataPrice
 module.exports = {
-    data_price: 109.5,
+    data_price: dataPrice,
+    total,
+    qnt,
     data_article_number: '424522-100',
     data_product_display_name: 'Nike Women As Trophy Swo White T-Shirts',
     data_add_date: 461658417,

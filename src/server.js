@@ -13,37 +13,39 @@ import schema from './Graphql'
 const helpers = { UserController, ProductController, PurchaseController }
 
 class Server {
-	constructor() {
-		// eslint-disable-next-line no-unused-vars
+    constructor() {
+        // eslint-disable-next-line no-unused-vars
         let apollo
         this.app = express()
         this.server()
         this.middlewares()
+    }
 
-	}
-
-	server() {
-		this.apollo = new ApolloServer({
+    server() {
+        this.apollo = new ApolloServer({
             schema,
-			context: async ({ req }) => {
+            context: async ({ req }) => {
                 const token = req.headers.authentication
-				return {
-					helpers,
-                    token,
-				}
-			}
-		})
+                return {
+                    helpers,
+                    token
+                }
+            },
+            cacheControl: {
+                defaultMaxAge: 5
+            }
+        })
 
-		this.app.graphqlUrl = this.apollo.graphqlPath
-	}
+        this.app.graphqlUrl = this.apollo.graphqlPath
+    }
 
-	middlewares() {
+    middlewares() {
         const app = this.app
-		this.app.use(express.json())
+        this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: true }))
 
-		this.apollo.applyMiddleware({ app })
-	}
+        this.apollo.applyMiddleware({ app })
+    }
 }
 
 export default new Server().app

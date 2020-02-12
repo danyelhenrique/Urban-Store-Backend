@@ -1,5 +1,10 @@
+const qnt = Math.floor(Math.random() * 10) + 1
+const dataPrice = 89.5
+const total = dataPrice
 module.exports = {
-    data_price: 89.5,
+    data_price: dataPrice,
+    total,
+    qnt,
     data_article_number: '595510-419',
     data_product_display_name: 'Nike Unisex Feather lite Blue Caps',
     data_add_date: 461658417,

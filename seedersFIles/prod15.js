@@ -1,5 +1,10 @@
+const qnt = Math.floor(Math.random() * 10) + 1
+const dataPrice = 64.9
+const total = dataPrice
 module.exports = {
-    data_price: 45.4,
+    data_price: dataPrice,
+    total,
+    qnt,
     data_article_number: 'LMTS004570',
     data_product_display_name: 'Locomotive Men American Glory White Tshirts',
     data_add_date: 410169843,
