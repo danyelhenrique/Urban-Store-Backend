@@ -1,6 +1,7 @@
-import sessionSchema from './session'
+import root from './root'
+import authSchema from './auth'
 import productSchema from './product'
 import purchaseSchema from './purchase'
 import userSchema from './user'
 
-export { sessionSchema, productSchema, purchaseSchema, userSchema }
+export { root, authSchema, productSchema, purchaseSchema, userSchema }

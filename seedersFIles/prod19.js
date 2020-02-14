@@ -1,4 +1,4 @@
-const qnt = Math.floor(Math.random() * 10) + 1
+const qnt = Math.floor(Math.random() * 20) + 1
 const dataPrice = 129.5
 const total = dataPrice
 module.exports = {
