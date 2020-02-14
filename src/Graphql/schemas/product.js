@@ -1,6 +1,8 @@
 import { gql } from 'apollo-server-express'
 import Product from '../js/product'
 const typeDefs = gql`
+    directive @isAuthenticate on FIELD_DEFINITION
+
 	type Product {
 		${Product}
 	}
@@ -9,10 +11,10 @@ const typeDefs = gql`
 		${Product}
 	}
 
-    extend type Mutation {
-		storeProduct(input: ProductInput!): Product
-		destroyProduct(id: ID!): Boolean
-		updateProduct(id: ID!, input: ProductInput): Product
+    extend type Mutation { 
+		storeProduct(input: ProductInput!): Product @isAuthenticate
+		destroyProduct(id: ID!): Boolean @isAuthenticate
+		updateProduct(id: ID!, input: ProductInput): Product @isAuthenticate
 	}
 
     extend type Query {

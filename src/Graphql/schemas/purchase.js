@@ -25,16 +25,16 @@ const typeDefs = gql`
         storePurchase(
             userId: ID!
             productIds: [ProductIdsIntpu!]!
-        ): storePurchaseUser
+        ): storePurchaseUser @isAuthenticate
 
-        destroyPurchase(userId: ID!): Boolean
+        destroyPurchase(userId: ID!): Boolean @isAuthenticate
 
         updatePurchase(
             userId: ID!
             prodId: ID!
             oldProdId: ID!
             purchaseId: ID!
-        ): User
+        ): User @isAuthenticate
     }
 
     extend type Query {
