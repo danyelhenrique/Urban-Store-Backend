@@ -1,52 +1,71 @@
 import UserModel from '../models/User'
-import jwt from 'jsonwebtoken'
 
 class User {
     async index({ offset, limit }) {
-        const users = await UserModel.findAll({
-            attributes: ['id', 'name', 'email', 'avatar_url']
-        })
-        return users
+        try {
+            const users = await UserModel.findAll({
+                attributes: ['id', 'name', 'email', 'avatar_url']
+            })
+            return users
+        } catch (err) {
+            return new Error('Internal server error <Fail to get Users>')
+        }
     }
 
     async show({ id }) {
-        const user = await UserModel.findByPk(id, {
-            attributes: ['id', 'name', 'email', 'avatar_url']
-        })
-        return user
+        try {
+            const user = await UserModel.findByPk(id, {
+                attributes: ['id', 'name', 'email', 'avatar_url']
+            })
+            return user
+        } catch (err) {
+            return new Error('Internal server error <Fail to get User>')
+        }
     }
 
     async store({ data: { name, email, password } }) {
-        const user = await UserModel.create({
-            name,
-            email,
-            password
-        })
-        return user
+        try {
+            const user = await UserModel.create({
+                name,
+                email,
+                password
+            })
+            return user
+        } catch (err) {
+            return new Error('Internal server error <Fail to store User>')
+        }
     }
 
     async update({ id, input }) {
-        const updateUser = await UserModel.findByPk(id, {
-            attributes: ['name', 'id', 'email', 'avatar_url']
-        })
+        try {
+            const updateUser = await UserModel.findByPk(id, {
+                attributes: ['name', 'id', 'email', 'avatar_url']
+            })
 
-        const user = await updateUser.update(input)
+            const user = await updateUser.update(input)
 
-        const payload = {
-            user: user.id,
-            name: user.name,
-            email: user.email,
-            avatar_url: user.avatar_url
+            const payload = {
+                user: user.id,
+                name: user.name,
+                email: user.email,
+                avatar_url: user.avatar_url
+            }
+
+            return payload
+        } catch (err) {
+            return new Error('Internal server error <Fail to update User>')
         }
-
-        return payload
     }
 
     async destroy({ id }) {
-        const destroyUser = await UserModel.findByPk(id)
+        try {
+            const destroyUser = await UserModel.findByPk(id)
 
-        const user = await destroyUser.destroy()
-        return !user.dataValues
+            await destroyUser.destroy()
+            return true
+        } catch (err) {
+            return new Error('Internal server error <Fail to destroy User>')
+        }
     }
 }
 

@@ -1,54 +1,70 @@
-import ProductModel from "../models/Product"
+import ProductModel from '../models/Product'
 
 class Product {
-    async index({ page, limit, filds }) {
+    async index(args) {
+        const { page, limit, filds } = args
+
         const attributes = [...filds]
-        const checkPage = page >= 0 ? 1 : page
         const offset = (page - 1) * limit + 1
-        // const offset = limit * checkPage - limit
-		// const offset = ((page + 1) - 1) * limit
-		// const offset = page;
-        // $offset = ($pageLimit * $page) - $pageLimit;
-
-        const products = await ProductModel.findAll({
-            limit,
-            offset,
-            attributes
-        })
-
-        return products
+        try {
+            const products = await ProductModel.findAll({
+                limit,
+                offset,
+                attributes
+            })
+            return products
+        } catch (error) {
+            return new Error('Internal server error <Fail to get Products>')
+        }
     }
 
-    async show({ where, filds }) {
-        const attributes = [...filds]
-        const product = await ProductModel.findOne({
-            where: where,
-            attributes
-        })
+    async show(args) {
+        const { where, filds } = args
 
-        return product.dataValues
+        const attributes = [...filds]
+
+        try {
+            const product = await ProductModel.findOne({
+                where: where,
+                attributes
+            })
+            return product.dataValues
+        } catch (error) {
+            return new Error('Internal server error <Fail to get Product>')
+        }
     }
 
     async store({ input }) {
-        const product = await ProductModel.create({
-            input
-        })
-        return product.dataValues
+        try {
+            const product = await ProductModel.create({
+                input
+            })
+            return product.dataValues
+        } catch (error) {
+            return new Error('Internal server error <Fail to store Product>')
+        }
     }
 
     async update({ id, input }) {
-        const updateProduct = await ProductModel.findByPk(id)
+        try {
+            const updateProduct = await ProductModel.findByPk(id)
 
-        const product = await updateProduct.update(input)
+            const product = await updateProduct.update(input)
 
-        return product
+            return product
+        } catch (error) {
+            return new Error('Internal server error <Fail to update Product>')
+        }
     }
 
     async destroy({ id }) {
-        const destroyProduct = await ProductModel.findByPk(id)
-
-        const product = await destroyProduct.destroy()
-        return !product.dataValues
+        try {
+            const destroyProduct = await ProductModel.findByPk(id)
+            await destroyProduct.destroy()
+            return true
+        } catch (error) {
+            return new Error('Internal server error <Fail to destroy Product>')
+        }
     }
 }
 

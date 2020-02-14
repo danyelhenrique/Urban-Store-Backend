@@ -1,4 +1,5 @@
 import { AuthenticationError } from 'apollo-server-express'
+
 import { promisify } from 'util'
 
 import UserModel from '../Api/models/User'
@@ -33,7 +34,7 @@ class Auth {
 
     async authenticate(token) {
         if (!token) {
-            return { isValid: false }
+            throw new AuthenticationError('Fail to authenticate user')
         }
 
         let userDecript
@@ -49,7 +50,7 @@ class Auth {
                 process.env.JWT_ENCRYPT
             )
         } catch (err) {
-            return { isValid: false }
+            throw new AuthenticationError('Fail to authenticate user')
         }
 
         if (!user) {
@@ -58,7 +59,7 @@ class Auth {
             })
             await findUser.update({ token: null })
 
-            return { isValid: false }
+            throw new AuthenticationError('Fail to authenticate user')
         }
 
         return { ...userDecript, token, isValid: true }

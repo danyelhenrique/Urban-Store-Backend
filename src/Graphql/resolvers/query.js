@@ -7,7 +7,7 @@ const resolvers = {
             const user = Auth.authenticate(token)
             return user
         },
-        indexProduct(_, args, { helpers: { ProductController } }, info) {
+        async indexProduct(_, args, { helpers: { ProductController } }, info) {
             const parseInfo = parseResolveInfo(info)
 
             const parseItems = parseInfo.fieldsByTypeName.Product
