@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 import User from '../models/User'
-// eslint-disable-next-line no-unused-vars
+import Product from '../models/Product'
 
 import IndexConnect from '../../Utils/controllers/indexConect'
 
@@ -42,14 +43,26 @@ class Purchase {
     }
 
     async store({ userId, productIds }) {
-        const user = await User.findOrCreate({
-            where: { id: userId },
+        console.log(userId)
+        console.log(productIds)
+
+        const user = await User.findByPk(userId, {
             attributes: ['id', 'name', 'email']
-        }).then(userArray => {
-            const user = userArray[0]
-            productIds.map(prodId => user.addProduct(prodId))
+        }).then(user => {
+            productIds.map(({ id }) => {
+                user.addProduct(id)
+            })
             return user
         })
+
+        const products = productIds.map(({ id, qnt }) =>
+            Product.findByPk(id, {
+                attributes: ['id']
+            }).then(prod => {
+                const subQnt = prod.id - qnt >= 0 ? prod.id - qnt : 0
+                return prod.update({ subQnt })
+            })
+        )
 
         return user
     }
