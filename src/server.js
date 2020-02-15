@@ -45,6 +45,9 @@ class Server {
         this.app.use(express.urlencoded({ extended: true }))
 
         this.apollo.applyMiddleware({ app })
+        app.get('/', (req, res) => {
+            res.json({ server: true })
+        })
     }
 }
 

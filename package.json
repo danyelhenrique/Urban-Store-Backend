@@ -5,7 +5,7 @@
     "main": "src/index.js",
     "scripts": {
         "build": "babel src -d ./build/src/",
-        "server": "nodemon src/index.js",
+        "dev": "nodemon src/index.js",
         "sequelize": "sequelize",
         "lint": "eslint --fix .",
         "start": "pm2 start build/src/index.js"
