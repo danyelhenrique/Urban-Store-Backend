@@ -7,6 +7,8 @@
         "server": "nodemon src/index.js",
         "sequelize": "sequelize",
         "lint": "eslint --fix .",
+        "pm2": "pm2",
+        "monit": "pm2 monit",
         "start": "pm2 start --interpreter babel-node src/index.js"
     },
     "keywords": [],
