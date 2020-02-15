@@ -8,7 +8,8 @@
         "dev": "nodemon src/index.js",
         "sequelize": "sequelize",
         "lint": "eslint --fix .",
-        "start": "pm2 start build/src/index.js"
+        "pm2": "pm2",
+        "start": "node build/src/index.js"
     },
     "keywords": [],
     "author": "",
