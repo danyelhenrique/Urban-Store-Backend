@@ -34,15 +34,16 @@
         "pm2": "^4.2.1",
         "require-all": "^3.0.0",
         "sequelize": "^5.21.2",
-        "yup": "^0.28.1"
-    },
-    "devDependencies": {
+        "yup": "^0.28.1",
+        "sequelize-cli": "^5.5.1",
         "@babel/cli": "^7.7.7",
         "@babel/core": "^7.7.5",
         "@babel/node": "^7.7.7",
         "@babel/plugin-proposal-class-properties": "^7.7.4",
         "@babel/preset-env": "^7.7.7",
-        "@babel/register": "^7.7.7",
+        "@babel/register": "^7.7.7"
+    },
+    "devDependencies": {
         "eslint": "^6.7.2",
         "eslint-config-prettier": "^6.7.0",
         "eslint-config-standard": "^14.1.0",
@@ -55,7 +56,6 @@
         "nodemon": "^2.0.1",
         "prettier": "^1.19.1",
         "prettier-eslint": "^9.0.1",
-        "prettier-standard": "^16.1.0",
-        "sequelize-cli": "^5.5.1"
+        "prettier-standard": "^16.1.0"
     }
 }
