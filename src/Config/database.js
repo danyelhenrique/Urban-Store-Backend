@@ -1,19 +1,14 @@
 import './dotenv'
 
 module.exports = {
-	username: process.env.DATABASE_USER_NAME,
-	password: process.env.DATABASE_USER_PASSWORD,
-	database: process.env.DATABASE_NAME,
-	host: process.env.DATABASE_HOST,
-	dialect: process.env.DATABASE_DIALECT,
-    native:true,
-    ssl:true,
-    dialectOptions: {
-    ssl: true
-    },
-	define: {
-		timestamps: true,
-		createdAt: 'created_at',
-		updatedAt: 'updated_at'
-	}
+    username: process.env.DATABASE_USER_NAME,
+    password: process.env.DATABASE_USER_PASSWORD,
+    database: process.env.DATABASE_NAME,
+    host: process.env.DATABASE_HOST,
+    dialect: process.env.DATABASE_DIALECT,
+    define: {
+        timestamps: true,
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
+    }
 }

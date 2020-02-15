@@ -4,15 +4,22 @@
     "description": "Api Graphql to store",
     "main": "src/index.js",
     "scripts": {
+        "build": "babel src -d ./build/src/",
         "server": "nodemon src/index.js",
         "sequelize": "sequelize",
         "lint": "eslint --fix .",
-        "start": "pm2 start --interpreter babel-node src/index.js"
+        "start": "pm2 start build/src/index.js"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@babel/cli": "^7.7.7",
+        "@babel/core": "^7.7.5",
+        "@babel/node": "^7.7.7",
+        "@babel/plugin-proposal-class-properties": "^7.7.4",
+        "@babel/preset-env": "^7.7.7",
+        "@babel/register": "^7.7.7",
         "apollo-server": "^2.9.12",
         "apollo-server-express": "^2.9.12",
         "babel-plugin-add-module-exports": "^1.0.2",
@@ -29,19 +36,12 @@
         "jsonwebtoken": "^8.5.1",
         "merge-graphql-schemas": "^1.7.3",
         "mongoose": "^5.7.13",
-        "pg": "^7.14.0",
+        "pg": "^7.18.1",
         "pg-hstore": "^2.3.3",
         "pm2": "^4.2.1",
         "require-all": "^3.0.0",
         "sequelize": "^5.21.2",
-        "yup": "^0.28.1",
-        "sequelize-cli": "^5.5.1",
-        "@babel/cli": "^7.7.7",
-        "@babel/core": "^7.7.5",
-        "@babel/node": "^7.7.7",
-        "@babel/plugin-proposal-class-properties": "^7.7.4",
-        "@babel/preset-env": "^7.7.7",
-        "@babel/register": "^7.7.7"
+        "sequelize-cli": "^5.5.1"
     },
     "devDependencies": {
         "eslint": "^6.7.2",
