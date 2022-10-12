@@ -21,7 +21,7 @@
         "@babel/plugin-proposal-class-properties": "^7.7.4",
         "@babel/preset-env": "^7.7.7",
         "@babel/register": "^7.7.7",
-        "apollo-server": "^2.9.12",
+        "apollo-server": "^2.25.4",
         "apollo-server-express": "^2.9.12",
         "babel-plugin-add-module-exports": "^1.0.2",
         "babel-preset-es2015": "^6.24.1",
